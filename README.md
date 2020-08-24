@@ -64,10 +64,10 @@ applications.html.erb
 </html>
 ```
 
-위 yield태그는 사용자가 만드는 erb파일을 가리키게된다 
-예를 들어, 만약 사용자가 index.html.erb를 생성하게 되면 위 구조를 따르되, yield태그를 사용하여
-사용자가 작성한 코드를 작성하게 되면 그 내용이 yield태그를 대체하게 되어 하나의 html이 만들어 지는 것이다
-java에서 abstract개념과 비슷하다. 구현은 뒤로미루고 상속받는 erb에서 구현되게 만들어 놓는 그런 느낌이다.
+위 yield태그는 사용자가 만드는 erb파일을 가리키게된다<br/>
+예를 들어, 만약 사용자가 index.html.erb를 생성하게 되면 위 구조를 따르되, yield태그를 사용하여<br/>
+사용자가 작성한 코드를 작성하게 되면 그 내용이 yield태그를 대체하게 되어 하나의 html이 만들어 지는 것이다<br/>
+java에서 abstract개념과 비슷하다. 구현은 뒤로미루고 상속받는 erb에서 구현되게 만들어 놓는 그런 느낌이다.<br/>
 
 5. `action하고 view를 만들면 항상 경로를 지정해야한다.`
 
@@ -97,10 +97,10 @@ get '/defense' to: 'home#defense'
 
 6. `정보전송` 
 
-form태그로 정보를 전송했다고 하자
-그러면 보낸 정보들이 해당 url을 처리하는 액션(메소드)에서 처리를 같이해라
-이 정보들은 어디담겨있느냐?
--> params
+form태그로 정보를 전송했다고 하자 <br/>
+그러면 보낸 정보들이 해당 url을 처리하는 액션(메소드)에서 처리를 같이해라 <br/>
+이 정보들은 어디담겨있느냐? <br/>
+-> params <br/>
 
 ```ruby
 <%= params %>
@@ -111,8 +111,8 @@ form태그로 정보를 전송했다고 하자
 2. 해당 url을 처리하는 액션에서 이 정보를 받아 처리할 수 있다.
 3. /attack url에서 `<%=params%>`를 통해서 전달된 정보를 확인할 수 있다.
 
-params 내용은 `{"args"=>"~~~"...,"controller"=>"homw", "action"=>"attack"}` 
-이러한데, 뜯어보면 home controller의 attack액션에서 args들을 할 수 있다.
+params 내용은 `{"args"=>"~~~"...,"controller"=>"homw", "action"=>"attack"}` <br/>
+이러한데, 뜯어보면 home controller의 attack액션에서 args들을 할 수 있다. <br/>
 
 **erb파일에서 ruby코드 사용법**
 
