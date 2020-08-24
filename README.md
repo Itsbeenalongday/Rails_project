@@ -1,6 +1,6 @@
 # Rails_projects
 
-rails remind
+__rails remind__
 
 ## Environment
 
@@ -16,7 +16,7 @@ rails remind
 
 ## VC 구현하기
 
-1. 컨트롤러 생성
+1. `컨트롤러 생성`
 ```bash
 
 $ rails g controller <controller name>
@@ -24,7 +24,7 @@ $ rails g controller <controller name>
 ```
 컨트롤러를 생성하게 되면, 자동적으로 대응되는 View파일이 생성된다.
 
-2. app 폴더 내에 MVC가 존재한다.
+2. `app 폴더 내에 MVC가 존재한다.`
 
 ```
 app/
@@ -36,11 +36,11 @@ app/
 |-- views/
 ```
 
-3. action에서는 데이터를 처리하고 view에서는 결과를 보여준다
+3. `action에서는 데이터를 처리하고 view에서는 결과를 보여준다`
 
 **rails에서는 view파일이름과 controller파일이름을 같게 만들어줘야한다.**
 
-4. erb는 ruby코드를 삽입할 수 있는 html의 확장판이다. (erb == embedded ruby)
+4. `erb는 ruby코드를 삽입할 수 있는 html의 확장판이다. (erb == embedded ruby)`
 
 views/layouts/ 내에 applications.html.erb가 존재하는데, 이 것은 쉽게 생각하면 만들어지는 view파일의 슈퍼조상이라고 생각하면 편하다
 
@@ -69,7 +69,7 @@ applications.html.erb
 사용자가 작성한 코드를 작성하게 되면 그 내용이 yield태그를 대체하게 되어 하나의 html이 만들어 지는 것이다
 java에서 abstract개념과 비슷하다. 구현은 뒤로미루고 상속받는 erb에서 구현되게 만들어 놓는 그런 느낌이다.
 
-5. action하고 view를 만들면 항상 경로를 지정해야한다.
+5. `action하고 view를 만들면 항상 경로를 지정해야한다.`
 
 /config/routes.rb에서 경로지정
 
@@ -95,7 +95,7 @@ home컨트롤러의 defense액션
 get '/defense' to: 'home#defense'
 ```
 
-6. 정보전송 
+6. `정보전송` 
 
 form태그로 정보를 전송했다고 하자
 그러면 보낸 정보들이 해당 url을 처리하는 액션(메소드)에서 처리를 같이해라
