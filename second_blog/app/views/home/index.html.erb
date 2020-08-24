@@ -1,0 +1,27 @@
+<h1> index </h1>
+
+<a href="/attack">공격</a>
+<a href="/defense">방어</a>
+
+<form action="/attack"> 
+<!-- 
+    /attack이라는 url로 정보를 보내면 해당 url을 처리하는 액션(attack)에서 userA, userB도 처리해라
+-->
+    누가?<br/>
+    <input type="text" name="userA">
+    <br/>
+    누구를?<br/>
+    <input type="text" name="userB">
+    <br/>
+    <input type="submit" value="공격">
+</form>
+
+<form action="/defense">
+    누가?<br/>
+    <input type="text" name="userA">
+    <br/>
+    누구의 공격을?<br/>
+    <input type="text" name="userB">
+    <br/>
+    <input type="submit" value="방어">
+</form>
