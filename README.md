@@ -29,7 +29,11 @@ select * from users where name = "dodo"
 Rails에서 사용하는 ORM Framework를 Active Record라고 부른다.
 이것을 사용하여 SQL을 사용하지 않고 ORM으로 DB 접근한다.
 
+<div align:center>
+
 ![](./img/ORM.PNG)
+
+</div>
 
 ## 구현하기
 
@@ -195,7 +199,7 @@ params를 보면 아래와 같이 보안토큰이 붙은 것을 볼 수 있다.
 
 ruby의 form_for를 쓰면 보안 토큰을 안전하게 처리
 
-9. 모델 생성하기
+### 9. 모델 생성하기
 
 ```bash
 $ rails g model <model_name>
