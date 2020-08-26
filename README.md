@@ -2,6 +2,14 @@
 
 인강들으면서 리마인드
 
+## reference
+
++ [도라도라 블로그](https://kbs4674.tistory.com/)
+
++ [인썸니아 인강](https://insomenia.com/courses)
+
++ [ruby cheat-sheet](https://github.com/Itsbeenalongday/Ruby-study)
+
 ## ORM
 
 Object-Relation Mapper
@@ -22,18 +30,6 @@ Rails에서 사용하는 ORM Framework를 Active Record라고 부른다.
 이것을 사용하여 SQL을 사용하지 않고 ORM으로 DB 접근한다.
 
 ![](./img/ORM.PNG)
-
-## Environment
-
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Ruby_On_Rails_Logo.svg/1200px-Ruby_On_Rails_Logo.svg.png)
-
-## reference
-
-+ [도라도라 블로그](https://kbs4674.tistory.com/)
-
-+ [인썸니아 인강](https://insomenia.com/courses)
-
-+ [ruby cheat-sheet](https://github.com/Itsbeenalongday/Ruby-study)
 
 ## 구현하기
 
