@@ -1,5 +1,27 @@
-# Blog_project
-블로그 만들기 프로젝트
+# Note
+
+인강들으면서 리마인드
+
+## ORM
+
+Object-Relation Mapper
+
+instance가 많아지면 기억을 못하기에 database로 관리한다
+
+DB 관리 언어
+
+SQL
+
+SQL로 관리하는 DB - 관게형 데이터베이스
+
+```sql
+select * from users where name = "dodo"
+```
+
+Rails에서 사용하는 ORM Framework를 Active Record라고 부른다.
+이것을 사용하여 SQL을 사용하지 않고 ORM으로 DB 접근한다.
+
+![](./img/ORM.PNG)
 
 ## Environment
 
@@ -76,7 +98,7 @@ end
 ```
 
 + routing
->어떤 url이 들어오면 이런 방식으로 저런 동작을 해라
+>어떤 url이 들어오면 이런 방식(url 요청방식)으로 저런 동작(컨트롤러 액션)을 해라
 
 형식
 ```
@@ -115,3 +137,57 @@ home controller의 attack액션에서 args들을 할 수 있다.
 =는 화면에 보여주고 싶을 때 optional하게 사용
 <%(=) codes... %>
 ```
+
++ 작업의 흐름
+
+![](./img/flow.PNG)
+
+7. controller를 만들 때 액션과 라우트를 자동으로 설정하기
+
+```bash
+
+$ rails g controller <controller name> <actions...>
+```
+
+8. get과 post의 차이
+
++ get: 입력한 정보를 url에 노출(노출이 되어도 상관없는 정보)
+
+```html
+<form action="/home/create" method="get">
+    제목: <input type="text" name="post_title"><br/>
+    내용: <textarea name="post_content"></textarea><br/>
+    <input type="submit" value="작성">
+</form>
+```
+작성시 이동된 url
+
+http://localhost:3000/home/create?post_title=d&post_content=dd
+
++ post: 입력한 정보를 숨겨서 보냄(노출이 되면 안되는 정보)
+
+```html
+<form action="/home/create" method="post">
+    제목: <input type="text" name="post_title"><br/>
+    내용: <textarea name="post_content"></textarea><br/>
+    <input type="submit" value="작성">
+</form>
+```
+
+```ruby
+post 'home/create'
+```
+
+보안토큰 에러가 난다. => CSRF 해킹공격때문에 막아놓았다
+
+그래서 form태그에 
+```ruby html
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+```
+이 코드를 붙여야한다.
+
+params를 보면 아래와 같이 보안토큰이 붙은 것을 볼 수 있다.
+
+{"authenticity_token"=>"9oDN41lX9b72eU6UAKcmifcWFcs1Bmh2wXuZqJ6aFG+/bY9FBSfLLXxQ8LBlq/R1m2Dzu4a/OJLAiT6netS8og==", "post_title"=>"3213", "post_content"=>"123213213", "controller"=>"home", "action"=>"create"}
+
+ruby의 form_for를 쓰면 보안 토큰을 안전하게 처리
