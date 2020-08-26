@@ -43,6 +43,7 @@ $ rails g controller <controller name>
 
 2. app 폴더 내에 MVC가 존재한다.
 
+```
 app/
 |
 |-- controllers/
@@ -50,6 +51,7 @@ app/
 |-- models/
 |
 |-- views/
+```
 
 3. action에서는 데이터를 처리하고 view에서는 결과를 보여준다
 
@@ -77,10 +79,10 @@ applications.html.erb
   </body>
 </html>
 ```
-위 yield태그는 사용자가 만드는 erb파일을 가리키게된다 예를 들어,
-만약 사용자가 index.html.erb를 생성하게 되면 위 구조를 따르되, yield태그를 사용하여
-사용자가 작성한 코드를 작성하게 되면 그 내용이 yield태그를 대체하게 되어 하나의 html이 만들어 지는 것이다
-java에서 abstract개념과 비슷하다. 구현은 뒤로미루고 상속받는 erb에서 구현되게 만들어 놓는 그런 느낌이다.
+위 yield태그는 사용자가 만드는 erb파일을 가리키게된다 예를 들어,  
+만약 사용자가 index.html.erb를 생성하게 되면 위 구조를 따르되, yield태그를 사용하여   
+사용자가 작성한 코드를 작성하게 되면 그 내용이 yield태그를 대체하게 되어 하나의 html이 만들어 지는 것이다   
+java에서 abstract개념과 비슷하다. 구현은 뒤로미루고 상속받는 erb에서 구현되게 만들어 놓는 그런 느낌이다.   
 
 5. action하고 view를 만들면 항상 경로를 지정해야한다.
 
@@ -124,8 +126,11 @@ form태그로 정보를 전송했다고 하자
 2. 해당 url을 처리하는 액션에서 이 정보를 받아 처리할 수 있다.
 3. /attack url에서 `<%=params%>`를 통해서 전달된 정보를 확인할 수 있다.
 
-params 내용은 {"args"=>"~~~"...,"controller"=>"homw", "action"=>"attack"} 이러한데, 뜯어보면
-home controller의 attack액션에서 args들을 할 수 있다.
+params 내용은 
+```ruby
+{"args"=>"~~~"...,"controller"=>"homw", "action"=>"attack"}
+```
+이러한데, 뜯어보면home controller의 attack액션에서 args들을 할 수 있다.   
 
 **erb파일에서 ruby코드 사용법**
 
@@ -184,7 +189,9 @@ post 'home/create'
 
 params를 보면 아래와 같이 보안토큰이 붙은 것을 볼 수 있다.
 
+```ruby
 {"authenticity_token"=>"9oDN41lX9b72eU6UAKcmifcWFcs1Bmh2wXuZqJ6aFG+/bY9FBSfLLXxQ8LBlq/R1m2Dzu4a/OJLAiT6netS8og==", "post_title"=>"3213", "post_content"=>"123213213", "controller"=>"home", "action"=>"create"}
+```
 
 ruby의 form_for를 쓰면 보안 토큰을 안전하게 처리
 
