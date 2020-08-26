@@ -1,0 +1,9 @@
+<h1>게시물 목록</h1>
+<a href="/home/new">새 글 작성</a>
+
+<form action="/home/create" method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    제목: <input type="text" name="post_title"><br/>
+    내용: <textarea name="post_content"></textarea><br/>
+    <input type="submit" value="작성">
+</form>
