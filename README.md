@@ -402,7 +402,7 @@ update는 수정된 글을 반영하는 액션
 
 action으로 지정된 것은 update인 것을 확인 할 수 있는데 제출을 하게 되면, update액션으로 이동하게 된다.
 
-### 13. scaffold view_helper
+### 13. scaffold
 
 + view_helper
 view를 다루기 쉽게 만든다.
@@ -438,3 +438,9 @@ view를 다루기 쉽게 만든다.
 ```
 _path를 붙이고 keyword argument(안쓰고 post.id만 넘겨도 됨)를 지정해서 넘기게 되면   
 url을 대체할 수 있다   
+
+2. Restful
+
++ scaffold
+구조, 뼈대라는 뜻으로   
+rails에서 scaffold는 migration/ model/ routes/ controller/ view를 한 번에 처리할 수 있는 것을 말한다. 
