@@ -7,3 +7,13 @@
     내용: <textarea name="post_content"></textarea><br/>
     <input type="submit" value="작성">
 </form>
+
+<% @posts.each do |instance| %>
+    제목: <%=instance.title%><br/>
+    내용: <%=instance.content%><br/>
+    <a href="/home/destroy/<%=instance.id%>">[삭제]</a><br/>
+    <% for i in 0...instance.content.length %>
+    <%= '_' %>
+    <% end %>
+    <br/>
+<%end%>

@@ -35,7 +35,7 @@ Rails에서 사용하는 ORM Framework를 Active Record라고 부른다.
 
 + [ruby cheat-sheet](https://github.com/Itsbeenalongday/Ruby-study)
 
-## VC 구현하기
+## 구현하기
 
 1. 컨트롤러 생성
 ```bash
@@ -191,3 +191,152 @@ params를 보면 아래와 같이 보안토큰이 붙은 것을 볼 수 있다.
 {"authenticity_token"=>"9oDN41lX9b72eU6UAKcmifcWFcs1Bmh2wXuZqJ6aFG+/bY9FBSfLLXxQ8LBlq/R1m2Dzu4a/OJLAiT6netS8og==", "post_title"=>"3213", "post_content"=>"123213213", "controller"=>"home", "action"=>"create"}
 
 ruby의 form_for를 쓰면 보안 토큰을 안전하게 처리
+
+9. 모델 생성하기
+
+```bash
+$ rails g model <model_name>
+```
+
+제목, 내용을 저장할 table=> model
+            +
+입력한 정보를 테이블에 넣어주는 기능=> create 액션
+
+
+/app/model/모델.rb
+
+/db/migrate/테이블.rb => 테이블의 모양을 결정
+
+테이블의 모양을 확정
+```bash
+$ rails db:migrate
+```
+
+테이블 삭제
+```bash
+$ rails db:drop
+```
+
+이제 테이블의 내용을 params를 이용하여 쌓아나간다
+
+**어떻게 controller의 instance variable을 view에서 사용할 수 있는것인가?**
+
+[rails opensource](https://github.com/rails/rails/blob/0c5552a3dd28e35cce64462765cc41c5355db0f1/actionpack/lib/abstract_controller/rendering.rb#L84-L86)
+
+```ruby
+view가 rendering될 때, 인스턴스 변스와 그 값이 controller에서 선택되어,
+view의 initializer로 전달되고, view 인스턴스가 만들어진다.
+
+아래와 같은 ruby method들이 사용된다
+
+*instance_variables - gets names of instance variables 
+*instance_variable_get(variable_name) - gets value of an instance variable
+*instance_variable_set(variable_name, variable_value) - sets value of an instance variable
+
+과정을 보자
+
+1. controller에서 instance variable을 뽑아낸다.
+
+def view_assigns
+  hash = {}
+  variables  = instance_variables
+  variables -= protected_instance_variables
+  variables -= DEFAULT_PROTECTED_INSTANCE_VARIABLES
+  variables.each { |name| hash[name[1..-1]] = instance_variable_get(name) }
+  hash
+end
+
+2. view로 instance variable을 전달한다
+def view_context
+  view_context_class.new(view_renderer, view_assigns, self)
+end
+
+3. view를 setting한다
+def assign(new_assigns) # :nodoc:
+  @_assigns = new_assigns.each { |key, value| instance_variable_set("@#{key}", value) }
+end
+```
+
+10. db에 들어간 데이터 조회
+
+```bash
+$ rails c
+
+irb(main):001:0> Post.all 
+```
+rails c 명령은 rails interperter를 실행시키는 명령이다      
+여기서 Post.all을 하게되면 Post 모델의 모든 데이터가 조회된다.   
+
+index페이지에서 이것을 확인해보자
+```ruby html
+<% Post.all.each do |instance| %>
+    제목: <%=instance.title%><br/>
+    내용: <%=instance.content%><br/>
+    <% for i in 0...instance.content.length %>
+    <%= '_' %>
+    <% end %>
+    <br/>
+<%end%>
+```
+
+11. 삭제
+
+늘 그렇듯 어떤 기능을 만들려고 하면 해당 프로세스를 따른다
+
+```
+< controller에서 액션을 만든다 >
+          |
+          v
+< 액션에 맞는 라우팅을 지정한다 >
+          |
+          v
+  < 액션에서 수행할 결과>
+          |
+          | -------------> 안 보여줘도 된다.
+          |
+          v 보여준다
+< view로 가서 html.erb를 만들어서 꾸민다 >
+```
+
+delete도 마찬가지임
+
++ 모든 instance 삭제
+```bash
+irb(main):001:0> Post.destroy_all
+```
++ 특정 instance 삭제 - id이용
+
+```ruby
+<% Post.all.each do |instance| %>
+    제목: <%=instance.title%><br/>
+    내용: <%=instance.content%><br/>
+    <a href="/home/destroy/<%=instance.id%>">[삭제]</a><br/>
+    <% for i in 0...instance.content.length %>
+    <%= '_' %>
+    <% end %>
+    <br/>
+<%end%>
+```
+url에 id를 추가하였다 -> route설정도 다시 해줘야 한다.
+params(액션으로 넘기는 모든 정보)로 id를 알 수 있다.
+
+```ruby
+Rails.application.routes.draw do
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'home#index'
+  get 'home/index'
+  # get 'home/index' => home#index
+  # home/index가 get방식으로 요청되면 home controller의 index액션을 실행
+  # 이게 없으면 redirect_to '/home/index'에서 에러가 난다
+  get 'home/new'
+  post 'home/create'
+
+  # url과 action이 같다면 단축이가능한데
+  # 이제 destroy와 destroy/:post_id로 url이 구분되므로 위와같이 단축할 수 없다. 
+  # 아래와 같이 url이 요청되면 home controller의 destroy액션으로 이동해라를 명시해야함
+  get 'home/destroy/:post_id' => 'home#destroy'
+  # /post_id, 문자그대로 post_id url이 됨
+  # /:post_id, post_id를 변수로 만들어 id를 저장할 수 있다.
+end
+
+```
