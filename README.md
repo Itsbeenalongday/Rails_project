@@ -29,7 +29,7 @@ select * from users where name = "dodo"
 Rails에서 사용하는 ORM Framework를 Active Record라고 부른다.
 이것을 사용하여 SQL을 사용하지 않고 ORM으로 DB 접근한다.
 
-<div align:center>
+<div align="center">
 
 ![](./img/ORM.PNG)
 
