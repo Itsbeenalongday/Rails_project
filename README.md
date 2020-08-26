@@ -347,3 +347,94 @@ Rails.application.routes.draw do
 end
 
 ```
+
+### 12. 수정
+
+수정하면서 id는 두 번 쓰이게 된다   
+1. 수정하는 양식에 이전에 썼던 특정 내용을 불러올 때   
+2. 이전 글을 수정한 뒤 새로운 내용으로 업데이트 할 때   
+
+```ruby
+ def edit
+        @post = Post.find(params[:post_id]) # 이전 내용을 불러온다
+    end
+
+    def update
+        # 인스턴스 변수를 사용하는 경우는 view파일에서 사용해야 할 때 사용
+        post = Post.find(params[:post_id])
+        post.title = params[:post_title]
+        post.content = params[:post_content]
+        post.save
+
+        redirect_to "/home/index"
+    end
+```
+
+edit은 글을 수정하는 공간으로 이동시키는 액션
+
+update는 수정된 글을 반영하는 액션
+
+으로 볼 수 있다.
+
+다음은 routes.rb파일의 일부이다.
+
+```ruby
+# 수정하는 공간으로 라우팅
+  get 'home/edit/:post_id' => 'home#edit'
+  # 수정을 반영하기 위한 라우팅
+  post 'home/update/:post_id' => 'home#update'
+```
+`수정하고싶은 것`만 수정하면 되기에 글 전체를 지칭하는 것이 아닌,   
+특정글을 선택하여 수정해야한다.   
+때문에 id가 필요하게 되고, 해당 글을 수정하기 위해 url에 id를 넘겨준다.   
+
+```ruby
+# edit.html.erb
+
+<form action="/home/update/<%=@post.id%>" method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    제목: <input type="text" name="post_title" value=<%=@post.title%>><br/>
+    내용: <textarea name="post_content"><%=@post.content%></textarea><br/>
+    <input type="submit" value="수정">
+</form>
+```
+여기서는 기존 내용을 불러와야 하기 때문에 value에 title과 content가 들어간 것을 볼 수 있다   
+
+action으로 지정된 것은 update인 것을 확인 할 수 있는데 제출을 하게 되면, update액션으로 이동하게 된다.
+
+### 13. scaffold view_helper
+
++ view_helper
+view를 다루기 쉽게 만든다.
+
+1. a태그를 쉽게 대체해 보자
+
+```ruby html
+<%=link_to '텍스트', url %>
+
+<a href="url"> 텍스트 </a>
+```
+
+**주의점**
+```ruby
+<%= link_to '삭제', "posts/destroy/#{post.id}">
+```
+루비 문법을 써야하는 상태에서   
+문자열 안에 문자가 아닌 변수를 넣으려면   
+`#{}`로 감싸줘야 한다   
+
+**url을 간소화 해보기**
+```ruby
+ # 수정하는 공간으로 라우팅
+  get 'home/edit/:post_id' => 'home#edit', as: 'home_destroy'
+  # 수정을 반영하기 위한 라우팅
+  post 'home/update/:post_id' => 'home#update', as: 'home_update'
+```
+
+저렇게 as로 이름을 바꾸고
+
+```ruby
+<%=link_to 'content', home_destroy_path(post_id: post.id) %>
+```
+_path를 붙이고 keyword argument(안쓰고 post.id만 넘겨도 됨)를 지정해서 넘기게 되면   
+url을 대체할 수 있다   

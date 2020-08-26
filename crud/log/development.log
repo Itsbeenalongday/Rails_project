@@ -2460,3 +2460,905 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 13ms (Views: 12.2ms | ActiveRecord: 0.1ms | Allocations: 4101)
 
 
+Started GET "/" for ::1 at 2020-08-26 15:43:49 +0900
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:11
+  Rendered home/index.html.erb within layouts/application (Duration: 5.7ms | Allocations: 1277)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 125ms (Views: 98.5ms | ActiveRecord: 0.2ms | Allocations: 5884)
+
+
+Started POST "/home/create" for ::1 at 2020-08-26 15:43:52 +0900
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"L6LObUcg4Kjj2pioYEmXi4Nj0S3VeVRqumoKrLUUmk//3V75kW8s3K0fWKXnr/H+EV9+Ltu1NJbDdAkMRthsNQ==", "post_title"=>"213", "post_content"=>"213213"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:10:in `create'
+  [1m[36mPost Create (1.8ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "213"], ["content", "213213"], ["created_at", "2020-08-26 06:43:52.803766"], ["updated_at", "2020-08-26 06:43:52.803766"]]
+  ↳ app/controllers/home_controller.rb:10:in `create'
+  [1m[35m (10.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:10:in `create'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 34ms (ActiveRecord: 12.1ms | Allocations: 6790)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 15:43:52 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:11
+  Rendered home/index.html.erb within layouts/application (Duration: 5.1ms | Allocations: 707)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 45ms (Views: 43.9ms | ActiveRecord: 0.2ms | Allocations: 4151)
+
+
+Started GET "/home/edit/39" for ::1 at 2020-08-26 15:43:54 +0900
+Processing by HomeController#edit as HTML
+  Parameters: {"post_id"=>"39"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 39], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:19:in `edit'
+  Rendering home/edit.html.erb within layouts/application
+  Rendered home/edit.html.erb within layouts/application (Duration: 2.0ms | Allocations: 215)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 26ms (Views: 19.6ms | ActiveRecord: 0.4ms | Allocations: 4598)
+
+
+Started POST "/home/update/39" for ::1 at 2020-08-26 15:43:56 +0900
+  
+ActionController::RoutingError (No route matches [POST] "/home/update/39"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.4) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.4) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/home/update/39" for ::1 at 2020-08-26 15:44:36 +0900
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#update as HTML
+  Parameters: {"authenticity_token"=>"ZPGKnNkvIN2UWe0grLHV3h+5gdj2kXTgBhy7lLf5Z560jhoID2DsqdqcLS0rV7OrjYUu2/hdFBx/Arg0RDWR5A==", "post_title"=>"213", "post_content"=>"213213333", "post_id"=>"39"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 39], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:24:in `update'
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 1.1ms | Allocations: 5154)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/controllers/home_controller.rb:25:in `update'
+Started POST "/home/update/39" for ::1 at 2020-08-26 15:45:26 +0900
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#update as HTML
+  Parameters: {"authenticity_token"=>"ZPGKnNkvIN2UWe0grLHV3h+5gdj2kXTgBhy7lLf5Z560jhoID2DsqdqcLS0rV7OrjYUu2/hdFBx/Arg0RDWR5A==", "post_title"=>"213", "post_content"=>"213213333", "post_id"=>"39"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 39], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:24:in `update'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:27:in `update'
+  [1m[36mPost Update (3.0ms)[0m  [1m[33mUPDATE "posts" SET "content" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["content", "213213333"], ["updated_at", "2020-08-26 06:45:27.119071"], ["id", 39]]
+  ↳ app/controllers/home_controller.rb:27:in `update'
+  [1m[35m (7.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:27:in `update'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 41ms (ActiveRecord: 11.6ms | Allocations: 8532)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 15:45:27 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:11
+  Rendered home/index.html.erb within layouts/application (Duration: 4.2ms | Allocations: 722)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 20ms (Views: 18.1ms | ActiveRecord: 0.3ms | Allocations: 4276)
+
+
+Started GET "/home/edit/39" for ::1 at 2020-08-26 15:45:28 +0900
+Processing by HomeController#edit as HTML
+  Parameters: {"post_id"=>"39"}
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 39], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:19:in `edit'
+  Rendering home/edit.html.erb within layouts/application
+  Rendered home/edit.html.erb within layouts/application (Duration: 0.3ms | Allocations: 66)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 21ms (Views: 16.4ms | ActiveRecord: 0.1ms | Allocations: 4004)
+
+
+Started POST "/home/update/39" for ::1 at 2020-08-26 15:45:35 +0900
+Processing by HomeController#update as HTML
+  Parameters: {"authenticity_token"=>"pfjuL9e/NHC3eNYz0eJOYy0YB3n8pPoVIkSaPVnAmxV1h367AfD4BPm9Fj5WBCgWvySoevJomulbWpmdqgxtbw==", "post_title"=>"213수", "post_content"=>"213213333수", "post_id"=>"39"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 39], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:24:in `update'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:27:in `update'
+  [1m[36mPost Update (1.3ms)[0m  [1m[33mUPDATE "posts" SET "title" = ?, "content" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["title", "213수"], ["content", "213213333수"], ["updated_at", "2020-08-26 06:45:35.017393"], ["id", 39]]
+  ↳ app/controllers/home_controller.rb:27:in `update'
+  [1m[35m (7.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:27:in `update'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 22ms (ActiveRecord: 8.9ms | Allocations: 4456)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 15:45:35 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:11
+  Rendered home/index.html.erb within layouts/application (Duration: 3.3ms | Allocations: 705)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 16ms (Views: 14.9ms | ActiveRecord: 0.2ms | Allocations: 4099)
+
+
+Started GET "/home/destroy/39" for ::1 at 2020-08-26 15:45:36 +0900
+Processing by HomeController#destroy as HTML
+  Parameters: {"post_id"=>"39"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 39], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:34:in `destroy'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:34:in `destroy'
+  [1m[36mPost Destroy (1.6ms)[0m  [1m[31mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 39]]
+  ↳ app/controllers/home_controller.rb:34:in `destroy'
+  [1m[35m (15.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:34:in `destroy'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 29ms (ActiveRecord: 17.4ms | Allocations: 4061)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 15:45:36 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:11
+  Rendered home/index.html.erb within layouts/application (Duration: 2.9ms | Allocations: 662)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 17ms (Views: 15.8ms | ActiveRecord: 0.2ms | Allocations: 4099)
+
+
+Started GET "/home/new" for ::1 at 2020-08-26 15:45:39 +0900
+Processing by HomeController#new as HTML
+Completed 406 Not Acceptable in 6ms (ActiveRecord: 0.0ms | Allocations: 1941)
+
+
+  
+ActionController::MissingExactTemplate (HomeController#new is missing a template for request formats: text/html):
+  
+actionpack (6.0.3.2) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (6.0.3.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `block in send_action'
+actionpack (6.0.3.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `tap'
+actionpack (6.0.3.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (6.0.3.2) lib/abstract_controller/base.rb:195:in `process_action'
+actionpack (6.0.3.2) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (6.0.3.2) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:135:in `run_callbacks'
+actionpack (6.0.3.2) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (6.0.3.2) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (6.0.3.2) lib/action_controller/metal/instrumentation.rb:33:in `block in process_action'
+activesupport (6.0.3.2) lib/active_support/notifications.rb:180:in `block in instrument'
+activesupport (6.0.3.2) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (6.0.3.2) lib/active_support/notifications.rb:180:in `instrument'
+actionpack (6.0.3.2) lib/action_controller/metal/instrumentation.rb:32:in `process_action'
+actionpack (6.0.3.2) lib/action_controller/metal/params_wrapper.rb:245:in `process_action'
+activerecord (6.0.3.2) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (6.0.3.2) lib/abstract_controller/base.rb:136:in `process'
+actionview (6.0.3.2) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.0.3.2) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (6.0.3.2) lib/action_controller/metal.rb:254:in `dispatch'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.3.2) lib/action_dispatch/routing/route_set.rb:834:in `call'
+rack (2.2.3) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.2.3) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.3) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/cookies.rb:648:in `call'
+activerecord (6.0.3.2) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.4) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.4) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.4) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/home/index" for ::1 at 2020-08-26 15:45:40 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:11
+  Rendered home/index.html.erb within layouts/application (Duration: 21.0ms | Allocations: 661)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 81ms (Views: 72.5ms | ActiveRecord: 0.2ms | Allocations: 4175)
+
+
+Started GET "/" for ::1 at 2020-08-26 15:47:48 +0900
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:11
+  Rendered home/index.html.erb within layouts/application (Duration: 6.5ms | Allocations: 1451)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 26ms (Views: 22.4ms | ActiveRecord: 0.6ms | Allocations: 6053)
+
+
+Started GET "/home/new" for ::1 at 2020-08-26 15:47:52 +0900
+Processing by HomeController#new as HTML
+  Rendering home/new.html.erb within layouts/application
+  Rendered home/new.html.erb within layouts/application (Duration: 8.9ms | Allocations: 159)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 33ms (Views: 24.5ms | ActiveRecord: 0.5ms | Allocations: 6774)
+
+
+Started POST "/home/create" for ::1 at 2020-08-26 15:47:54 +0900
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"ynryWx0o0BskmdJxCewlaQ+6QSw4wX4/HWrp0jqRHBEaBWLPy2ccb2pcEnyOCkMcnYbuLzYNHsNkdOpyyV3qaw==", "post_title"=>"2132", "post_content"=>"123213"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:15:in `create'
+  [1m[36mPost Create (2.1ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "2132"], ["content", "123213"], ["created_at", "2020-08-26 06:47:54.844450"], ["updated_at", "2020-08-26 06:47:54.844450"]]
+  ↳ app/controllers/home_controller.rb:15:in `create'
+  [1m[35m (12.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:15:in `create'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 25ms (ActiveRecord: 14.3ms | Allocations: 3869)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 15:47:54 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:11
+  Rendered home/index.html.erb within layouts/application (Duration: 3.2ms | Allocations: 707)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 17ms (Views: 16.4ms | ActiveRecord: 0.2ms | Allocations: 4124)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 15:48:16 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:5
+  Rendered home/index.html.erb within layouts/application (Duration: 9.5ms | Allocations: 873)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 31ms (Views: 29.4ms | ActiveRecord: 0.2ms | Allocations: 5210)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 15:48:41 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 15.0ms | Allocations: 877)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 35ms (Views: 32.6ms | ActiveRecord: 0.3ms | Allocations: 5196)
+
+
+Started GET "/home/new" for ::1 at 2020-08-26 15:48:43 +0900
+Processing by HomeController#new as HTML
+  Rendering home/new.html.erb within layouts/application
+  Rendered home/new.html.erb within layouts/application (Duration: 1.7ms | Allocations: 165)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 17ms (Views: 15.5ms | ActiveRecord: 0.0ms | Allocations: 3705)
+
+
+Started POST "/home/create" for ::1 at 2020-08-26 15:48:46 +0900
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"sqwycBAhNmxashvAz4SIETplHEaaxJ1kfv36RYmiiChi06Lkxm76GBR3281IYu5kqFmzRZQI/ZgH4/nlem5+Ug==", "post_title"=>"1", "post_content"=>"1"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:15:in `create'
+  [1m[36mPost Create (2.0ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "1"], ["content", "1"], ["created_at", "2020-08-26 06:48:46.859173"], ["updated_at", "2020-08-26 06:48:46.859173"]]
+  ↳ app/controllers/home_controller.rb:15:in `create'
+  [1m[35m (11.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:15:in `create'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 26ms (ActiveRecord: 13.1ms | Allocations: 3916)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 15:48:46 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 3.2ms | Allocations: 669)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 13ms (Views: 12.5ms | ActiveRecord: 0.3ms | Allocations: 4075)
+
+
+Started GET "/home/destroy/40" for ::1 at 2020-08-26 15:48:48 +0900
+Processing by HomeController#destroy as HTML
+  Parameters: {"post_id"=>"40"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 40], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[36mPost Destroy (1.6ms)[0m  [1m[31mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 40]]
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[35m (13.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 33ms (ActiveRecord: 15.2ms | Allocations: 4179)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 15:48:48 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 2.3ms | Allocations: 634)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 15ms (Views: 13.5ms | ActiveRecord: 0.2ms | Allocations: 4068)
+
+
+Started GET "/home/new" for ::1 at 2020-08-26 15:48:49 +0900
+Processing by HomeController#new as HTML
+  Rendering home/new.html.erb within layouts/application
+  Rendered home/new.html.erb within layouts/application (Duration: 0.2ms | Allocations: 57)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 20ms (Views: 18.6ms | ActiveRecord: 0.0ms | Allocations: 3474)
+
+
+Started POST "/home/create" for ::1 at 2020-08-26 15:48:52 +0900
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"N0f+QOiNg5nEYl0fCJ7Vj9ex4r7t2rCv2Hb8OugtZBvnOG7UPsJP7YqnnRKPeLP6RY1NveMW0FOhaP+aG+GSYQ==", "post_title"=>"2", "post_content"=>"22"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:15:in `create'
+  [1m[36mPost Create (1.7ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "2"], ["content", "22"], ["created_at", "2020-08-26 06:48:52.124787"], ["updated_at", "2020-08-26 06:48:52.124787"]]
+  ↳ app/controllers/home_controller.rb:15:in `create'
+  [1m[35m (13.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:15:in `create'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 25ms (ActiveRecord: 14.7ms | Allocations: 3896)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 15:48:52 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 4.3ms | Allocations: 661)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 16ms (Views: 15.0ms | ActiveRecord: 0.2ms | Allocations: 4080)
+
+
+Started GET "/home/new" for ::1 at 2020-08-26 15:48:54 +0900
+Processing by HomeController#new as HTML
+  Rendering home/new.html.erb within layouts/application
+  Rendered home/new.html.erb within layouts/application (Duration: 0.4ms | Allocations: 57)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 22ms (Views: 20.8ms | ActiveRecord: 0.0ms | Allocations: 3458)
+
+
+Started POST "/home/create" for ::1 at 2020-08-26 15:48:58 +0900
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"1OHLhh0wtNPeW8gEG8Hlhu+3RV5bGbcocv17Bg9pENAEnlsSy394p5CeCAmcJ4PzfYvqXVXV19QL43im/KXmqg==", "post_title"=>"3", "post_content"=>"333"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:15:in `create'
+  [1m[36mPost Create (1.6ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "3"], ["content", "333"], ["created_at", "2020-08-26 06:48:58.028117"], ["updated_at", "2020-08-26 06:48:58.028117"]]
+  ↳ app/controllers/home_controller.rb:15:in `create'
+  [1m[35m (12.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:15:in `create'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 25ms (ActiveRecord: 13.8ms | Allocations: 3890)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 15:48:58 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 3.4ms | Allocations: 690)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 17ms (Views: 16.0ms | ActiveRecord: 0.2ms | Allocations: 4095)
+
+
+Started GET "/home/new" for ::1 at 2020-08-26 15:48:59 +0900
+Processing by HomeController#new as HTML
+  Rendering home/new.html.erb within layouts/application
+  Rendered home/new.html.erb within layouts/application (Duration: 0.3ms | Allocations: 57)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 23ms (Views: 22.0ms | ActiveRecord: 0.0ms | Allocations: 3610)
+
+
+Started POST "/home/create" for ::1 at 2020-08-26 15:49:02 +0900
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"q7qf+cjByapW6bWne876NYyhZjCDvetfZ0ck6b90s+p7xQ9tHo4F3hgsdar8KJxAHp3JM41xi6MeWSdJTLhFkA==", "post_title"=>"4", "post_content"=>"444"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:15:in `create'
+  [1m[36mPost Create (1.9ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "4"], ["content", "444"], ["created_at", "2020-08-26 06:49:02.404500"], ["updated_at", "2020-08-26 06:49:02.404500"]]
+  ↳ app/controllers/home_controller.rb:15:in `create'
+  [1m[35m (10.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:15:in `create'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 23ms (ActiveRecord: 12.3ms | Allocations: 3888)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 15:49:02 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 3.8ms | Allocations: 720)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 16ms (Views: 14.8ms | ActiveRecord: 0.2ms | Allocations: 4127)
+
+
+Started GET "/home/edit/44" for ::1 at 2020-08-26 15:49:04 +0900
+Processing by HomeController#edit as HTML
+  Parameters: {"post_id"=>"44"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 44], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:21:in `edit'
+  Rendering home/edit.html.erb within layouts/application
+  Rendered home/edit.html.erb within layouts/application (Duration: 1.1ms | Allocations: 203)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 25ms (Views: 18.1ms | ActiveRecord: 0.2ms | Allocations: 4316)
+
+
+Started POST "/home/update/44" for ::1 at 2020-08-26 15:49:11 +0900
+Processing by HomeController#update as HTML
+  Parameters: {"authenticity_token"=>"WptgKGObAbXSqQ5iEn21iggVm/G+IFrMx3lXqthCAYCK5PC8tdTNwZxszm+Vm9P/mik08rDsOjC+Z1QKK473+g==", "post_title"=>"4수", "post_content"=>"444수", "post_id"=>"44"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 44], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:26:in `update'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:29:in `update'
+  [1m[36mPost Update (1.4ms)[0m  [1m[33mUPDATE "posts" SET "title" = ?, "content" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["title", "4수"], ["content", "444수"], ["updated_at", "2020-08-26 06:49:11.643185"], ["id", 44]]
+  ↳ app/controllers/home_controller.rb:29:in `update'
+  [1m[35m (6.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:29:in `update'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 23ms (ActiveRecord: 7.9ms | Allocations: 4454)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 15:49:11 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 3.4ms | Allocations: 722)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 17ms (Views: 15.3ms | ActiveRecord: 0.2ms | Allocations: 4132)
+
+
+Started GET "/home/destroy/44" for ::1 at 2020-08-26 15:49:15 +0900
+Processing by HomeController#destroy as HTML
+  Parameters: {"post_id"=>"44"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 44], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[36mPost Destroy (1.4ms)[0m  [1m[31mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 44]]
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[35m (17.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 31ms (ActiveRecord: 18.8ms | Allocations: 4055)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 15:49:15 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 2.8ms | Allocations: 690)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 44ms (Views: 42.1ms | ActiveRecord: 0.2ms | Allocations: 4793)
+
+
+Started GET "/home/destroy/41" for ::1 at 2020-08-26 16:44:13 +0900
+  [1m[35m (2.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#destroy as HTML
+  Parameters: {"post_id"=>"41"}
+  [1m[36mPost Load (1.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 41], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[35m (0.7ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[36mPost Destroy (23.0ms)[0m  [1m[31mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 41]]
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[35m (44.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 246ms (ActiveRecord: 69.6ms | Allocations: 4082)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 16:44:13 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 72.0ms | Allocations: 1138)
+Completed 500 Internal Server Error in 105ms (ActiveRecord: 0.0ms | Allocations: 2352)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <h1>게시물 목록</h1>
+
+<hr/>
+
+<a href="/home/new">새 글 작성</a>
+
+<hr/>
+
+<% @posts.each do |instance| %>
+    제목: <%=instance.title%><br/>
+    내용: <%=instance.content%><br/>
+    <%=link_to('[삭제]'), "home/destroy/#{instance.id}"%>
+    <a href="/home/edit/<%=instance.id%>">[수정]</a><br/>
+    <% for i in 0...instance.content.length %>
+        <%= '_' %>
+    <% end %>
+    <br/>
+<%end%>
+):
+1:    <h1>게시물 목록</h1>
+2:    
+3:    <hr/>
+4:    
+5:    <a href="/home/new">새 글 작성</a>
+6:    
+7:    <hr/>
+8:    
+9:    <% @posts.each do |instance| %>
+10:        제목: <%=instance.title%><br/>
+11:        내용: <%=instance.content%><br/>
+12:        <%=link_to('[삭제]'), "home/destroy/#{instance.id}"%>
+13:        <a href="/home/edit/<%=instance.id%>">[수정]</a><br/>
+14:        <% for i in 0...instance.content.length %>
+15:            <%= '_' %>
+16:        <% end %>
+17:        <br/>
+18:    <%end%>
+  
+app/views/home/index.html.erb:12: syntax error, unexpected ',', expecting ')'
+app/views/home/index.html.erb:12: syntax error, unexpected ',', expecting ')'
+app/views/home/index.html.erb:12: syntax error, unexpected ',', expecting ')'
+app/views/home/index.html.erb:12: syntax error, unexpected ',', expecting ')'
+app/views/home/index.html.erb:12: syntax error, unexpected ',', expecting ')'
+app/views/home/index.html.erb:12: syntax error, unexpected ',', expecting ')'
+Started GET "/home/index" for ::1 at 2020-08-26 16:52:32 +0900
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 18.3ms | Allocations: 4277)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 36ms (Views: 32.8ms | ActiveRecord: 0.2ms | Allocations: 8906)
+
+
+Started GET "/home/edit/42" for ::1 at 2020-08-26 16:52:35 +0900
+Processing by HomeController#edit as HTML
+  Parameters: {"post_id"=>"42"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:21:in `edit'
+  Rendering home/edit.html.erb within layouts/application
+  Rendered home/edit.html.erb within layouts/application (Duration: 1.4ms | Allocations: 203)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 26ms (Views: 17.2ms | ActiveRecord: 0.3ms | Allocations: 4426)
+
+
+Started GET "/home/edit/42" for ::1 at 2020-08-26 16:52:38 +0900
+Processing by HomeController#edit as HTML
+  Parameters: {"post_id"=>"42"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:21:in `edit'
+  Rendering home/edit.html.erb within layouts/application
+  Rendered home/edit.html.erb within layouts/application (Duration: 0.3ms | Allocations: 66)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 30ms (Views: 19.5ms | ActiveRecord: 0.3ms | Allocations: 4019)
+
+
+Started POST "/home/update/42" for ::1 at 2020-08-26 16:52:39 +0900
+Processing by HomeController#update as HTML
+  Parameters: {"authenticity_token"=>"JtEww0WfCybrTZq7G38S1e8hspH4roQlQx77IE2qB5b2rqBXk9DHUqWIWracmXSgfR0dkvZi5Nk6APiAvmbx7A==", "post_title"=>"2", "post_content"=>"22", "post_id"=>"42"}
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:26:in `update'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms | Allocations: 999)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 16:52:39 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 2.8ms | Allocations: 773)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 16ms (Views: 15.2ms | ActiveRecord: 0.2ms | Allocations: 4177)
+
+
+Started GET "/home/edit/42" for ::1 at 2020-08-26 16:53:39 +0900
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#edit as HTML
+  Parameters: {"post_id"=>"42"}
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:21:in `edit'
+  Rendering home/edit.html.erb within layouts/application
+  Rendered home/edit.html.erb within layouts/application (Duration: 0.7ms | Allocations: 69)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 395ms (Views: 233.1ms | ActiveRecord: 3.3ms | Allocations: 8384)
+
+
+Started GET "/home/edit/43" for ::1 at 2020-08-26 16:53:58 +0900
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#edit as HTML
+  Parameters: {"post_id"=>"43"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 43], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:21:in `edit'
+  Rendering home/edit.html.erb within layouts/application
+  Rendered home/edit.html.erb within layouts/application (Duration: 3.1ms | Allocations: 69)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 364ms (Views: 300.7ms | ActiveRecord: 3.5ms | Allocations: 8754)
+
+
+Started GET "/" for ::1 at 2020-08-26 16:55:19 +0900
+Started GET "/" for ::1 at 2020-08-26 16:55:19 +0900
+  [1m[35m (13.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2020-08-26 16:55:20 +0900
+Processing by HomeController#index as HTML
+Processing by HomeController#index as HTML
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendering home/index.html.erb within layouts/application
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  ↳ app/views/home/index.html.erb:9
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 45.7ms | Allocations: 6218)
+  Rendered home/index.html.erb within layouts/application (Duration: 34.0ms | Allocations: 6277)
+  Rendered home/index.html.erb within layouts/application (Duration: 35.1ms | Allocations: 6447)
+[Webpacker] Everything's up-to-date. Nothing to do
+[Webpacker] Everything's up-to-date. Nothing to do
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 250ms (Views: 182.0ms | ActiveRecord: 1.8ms | Allocations: 24617)
+
+
+Completed 200 OK in 261ms (Views: 213.6ms | ActiveRecord: 0.3ms | Allocations: 25750)
+
+
+Completed 200 OK in 176ms (Views: 174.5ms | ActiveRecord: 0.3ms | Allocations: 22083)
+
+
+Started GET "/home/destroy/42" for ::1 at 2020-08-26 16:55:22 +0900
+Processing by HomeController#destroy as HTML
+  Parameters: {"post_id"=>"42"}
+  [1m[36mPost Load (1.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[36mPost Destroy (1.9ms)[0m  [1m[31mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 42]]
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[35m (9.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 62ms (ActiveRecord: 12.2ms | Allocations: 4567)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 16:55:22 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 6.7ms | Allocations: 699)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 27ms (Views: 25.3ms | ActiveRecord: 0.3ms | Allocations: 4133)
+
+
+Started GET "/home/destroy/43" for ::1 at 2020-08-26 16:55:23 +0900
+Processing by HomeController#destroy as HTML
+  Parameters: {"post_id"=>"43"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 43], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[36mPost Destroy (1.9ms)[0m  [1m[31mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 43]]
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[35m (8.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 48ms (ActiveRecord: 11.1ms | Allocations: 4086)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 16:55:23 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 5.7ms | Allocations: 610)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 22ms (Views: 21.1ms | ActiveRecord: 0.2ms | Allocations: 4047)
+
+
+Started GET "/home/new" for ::1 at 2020-08-26 16:55:24 +0900
+Processing by HomeController#new as HTML
+  Rendering home/new.html.erb within layouts/application
+  Rendered home/new.html.erb within layouts/application (Duration: 1.3ms | Allocations: 168)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 23ms (Views: 21.4ms | ActiveRecord: 0.0ms | Allocations: 3760)
+
+
+Started POST "/home/create" for ::1 at 2020-08-26 16:55:28 +0900
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"qRrtmtCfFyspm5VSiIA183Qy01+4lP4lrSnqSa/5gRJ5ZX0OBtDbX2deVV8PZlOG5g58XLZYntnUN+npXDV3aA==", "post_title"=>"1", "post_content"=>"1"}
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:15:in `create'
+  [1m[36mPost Create (3.1ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "1"], ["content", "1"], ["created_at", "2020-08-26 07:55:28.861291"], ["updated_at", "2020-08-26 07:55:28.861291"]]
+  ↳ app/controllers/home_controller.rb:15:in `create'
+  [1m[35m (14.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:15:in `create'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 48ms (ActiveRecord: 18.1ms | Allocations: 4019)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 16:55:28 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 4.0ms | Allocations: 694)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 45ms (Views: 43.2ms | ActiveRecord: 0.2ms | Allocations: 4815)
+
+
+Started GET "/home/new" for ::1 at 2020-08-26 16:55:30 +0900
+Processing by HomeController#new as HTML
+  Rendering home/new.html.erb within layouts/application
+  Rendered home/new.html.erb within layouts/application (Duration: 0.2ms | Allocations: 57)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 27ms (Views: 26.0ms | ActiveRecord: 0.0ms | Allocations: 3464)
+
+
+Started POST "/home/create" for ::1 at 2020-08-26 16:55:33 +0900
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"3dhYPOzoKGb2s43c5GbLEkLTruOdExOWTOsz+BZ16qsNp8ioOqfkErh2TdFjgK1n0O8B4JPfc2o19TBY5bkc0Q==", "post_title"=>"2", "post_content"=>"22"}
+  [1m[35m (1.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:15:in `create'
+  [1m[36mPost Create (3.6ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "2"], ["content", "22"], ["created_at", "2020-08-26 07:55:33.120820"], ["updated_at", "2020-08-26 07:55:33.120820"]]
+  ↳ app/controllers/home_controller.rb:15:in `create'
+  [1m[35m (34.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:15:in `create'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 103ms (ActiveRecord: 38.7ms | Allocations: 3015)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 16:55:33 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (2.9ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 26.3ms | Allocations: 763)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 178ms (Views: 171.4ms | ActiveRecord: 2.9ms | Allocations: 4652)
+
+
+Started GET "/home/edit/45" for ::1 at 2020-08-26 16:55:35 +0900
+Processing by HomeController#edit as HTML
+  Parameters: {"post_id"=>"45"}
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 45], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:21:in `edit'
+  Rendering home/edit.html.erb within layouts/application
+  Rendered home/edit.html.erb within layouts/application (Duration: 4.3ms | Allocations: 210)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 235ms (Views: 212.2ms | ActiveRecord: 0.5ms | Allocations: 6201)
+
+
+Started POST "/home/update/45" for ::1 at 2020-08-26 16:55:39 +0900
+Processing by HomeController#update as HTML
+  Parameters: {"authenticity_token"=>"mUKJI5H3fSEfIgBKP/B7AIcZ0O5I7WBCRfI+Xts8In5JPRm3R7ixVVHnwEe4Fh11FSV/7UYhAL487D3+KPDUBA==", "post_title"=>"11", "post_content"=>"1111", "post_id"=>"45"}
+  [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 45], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:26:in `update'
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:29:in `update'
+  [1m[36mPost Update (15.9ms)[0m  [1m[33mUPDATE "posts" SET "title" = ?, "content" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["title", "11"], ["content", "1111"], ["updated_at", "2020-08-26 07:55:39.191814"], ["id", 45]]
+  ↳ app/controllers/home_controller.rb:29:in `update'
+  [1m[35m (19.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:29:in `update'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 109ms (ActiveRecord: 36.9ms | Allocations: 4038)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 16:55:39 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (1.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 22.3ms | Allocations: 773)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 755ms (Views: 746.1ms | ActiveRecord: 1.6ms | Allocations: 8412)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 16:59:31 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 19.7ms | Allocations: 1060)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 39ms (Views: 37.5ms | ActiveRecord: 0.2ms | Allocations: 5385)
+
+
+Started GET "/home/destroy/45" for ::1 at 2020-08-26 16:59:33 +0900
+Processing by HomeController#destroy as HTML
+  Parameters: {"post_id"=>"45"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 45], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[36mPost Destroy (1.8ms)[0m  [1m[31mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 45]]
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+  [1m[35m (7.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:36:in `destroy'
+Redirected to http://localhost:3000/home/index
+Completed 302 Found in 26ms (ActiveRecord: 9.5ms | Allocations: 4080)
+
+
+Started GET "/home/index" for ::1 at 2020-08-26 16:59:33 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 2.3ms | Allocations: 707)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 55ms (Views: 54.2ms | ActiveRecord: 0.1ms | Allocations: 5358)
+
+
