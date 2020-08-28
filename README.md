@@ -1,4 +1,4 @@
-# Note
+cd s# Note
 
 인강들으면서 리마인드
 
@@ -444,3 +444,63 @@ url을 대체할 수 있다
 + scaffold
 구조, 뼈대라는 뜻으로   
 rails에서 scaffold는 migration/ model/ routes/ controller/ view를 한 번에 처리할 수 있는 것을 말한다. 
+
+```bash
+$ rails g scaffold posts title:string content:text
+```
+로 하게 되면,   
+모델이름은 Post가 되고, 컨트롤러이름은 posts가 된다.
+
+controller이름은 model의 복수형으로 만드는 것이 관례  
+
+하고 난 후에 migration file을 확인하고, 테이블을 확정지어줘야 한다.
+
+```bash
+$ rails db:migrate
+```
+
+Restful은 무엇(resource)을 어떻게(HTTP method) 할 지 표현
+
++ resource는 crud할 수 있는 정보 ex) 하나의 게시물, 유저, 댓글 etc...
+
++ HTTP method 추출(GET)/ 생성(POST)/ 변경(PUT/PATCH)/ 제거(DELETE)
+
+어떤 동작을 할 지 예측할 수 있다.
+
+<div align="center">
+
+![](./img/restful.PNG)
+
+</div>
+
+왜 HTTP method를 사용하는가?
+
+```
+같은 url을 사용하고, http method로 동작을 달리 지정해주면,
+url을 재사용할 수 있고, 서버의 처리측면에서도 효율적이다
+
+/post/:id --|-- get
+            |-- put
+            |-- delete
+```
+
+다음은 index.html.erb의 일부이다
+
+```ruby
+<% @posts.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= post.content %></td>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+```
+
+link_to의 url부분에 post가 들어가 있는 것을 볼 수 있다.   
+여기서 post는 게시글 하나를 지칭하는 것이기 때문에 url 부분에 post를 쓰게되면   
+알아서 자동적으로 url을 생성해주고, 우리가 할 일은 method만 지정해주면 되는 것이다.   
+post는 post_path(id: post.id) 또는 post_path(post)와 동일한 것이다.   
+그리고 method를 따로 지정하지 않으면 default는 get이다.   
+
