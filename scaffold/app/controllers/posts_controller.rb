@@ -28,10 +28,12 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html do redirect_to @post, notice: 'Post was successfully created.' end
+        flash[:notice] = 'Post was successfully created.'
+        format.html do redirect_to @post end
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
+        # render함수에 json을 키워드 매개변수로 넘긴것, status키워드 매개변수에 unprocessable_entity라는 symbol을 넘긴것
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

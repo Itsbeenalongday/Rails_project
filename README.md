@@ -504,3 +504,196 @@ link_to의 url부분에 post가 들어가 있는 것을 볼 수 있다.
 post는 post_path(id: post.id) 또는 post_path(post)와 동일한 것이다.   
 그리고 method를 따로 지정하지 않으면 default는 get이다.   
 
+3. scaffold 샅샅이 훑어보기
+
++ new.html.erb
+```ruby
+<h1>New Post</h1>
+
+<%= render 'form', post: @post %>
+
+<%= link_to 'Back', posts_path %>
+```
+'form'은 무엇일까?
+
++ _form.html.erb
+
+render로 그리기 위해서는 파일명 앞에 `_`가 붙어야 한다.   
+
+그리고 post는 form_for에서 사용되는 변수이고, 이것을 함께 넘겨주게 된다.
+
+```html
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+```
++ edit.html.erb
+
+```ruby
+<h1>Editing Post</h1>
+
+<%= render 'form', post: @post %>
+
+<%= link_to 'Show', @post %> |
+<%= link_to 'Back', posts_path %>
+
+```
+
+그렇다면 여기서 의문: 어떻게 edit하고 new하고 같은 form을 쓰는거지?   
+
+new는 새로운 생성이고, edit은 이전의 내용을 불러와야 하는 것인데 말이지   
+
+form_for의 기능에 그 비밀이 숨겨져있다.   
+
+form_for는 모델 객체(post)가 신규인지, 이미 저장 완료 됐는지를 판단하여 적절한 url로 안내하기 된다.   
+
+즉 @post = Post.new이면 create액션으로, @post = Post.find(params[:id])이면 update액션으로 보내준다.   
+
+때문에, 이전의 프로젝트에서 new action에서는 아무 작업도 하지 않고 view만 보여줬지만,   form_for를 사용하기 위해서는 @post가 새로운 객체인지 이미 존재하던 객체인지 알려줘야 하기 때문에 `@post = Post.new`라는 코드를 삽입해야한다.   
+
++ before_action
+
+controller에 이러한 코드가 있다
+
+```ruby
+ before_action :set_post, only: [:show, :edit, :update, :destroy]
+```
+
+해석해보자만 before_action이란 것은 사전에 해야할 동작을 지칭하는 것으로
+
+ ruby에서는 이런 코드가 가능하다
+
+ ```ruby
+ def hello msg: :"hello world"
+ puts msg
+ end
+
+ class Greet
+ hello
+ end
+
+ g = Greet.new
+
+ g.hello
+ g.hello msg: :"world hello"
+---------------------------
+ => hello world
+ => world hello
+ ```
+
+즉, before_action이란 method를 Postscontroller클래스에서 사용하는 것인데
+인자로 set_post라는 심볼객체를 받고 only라는 키워드 변수를 사용하여
+show edit update destroy의 심볼들을 지정한다.
+
+```ruby
+method(:some_symbol)
+```
+method 메소드는 argument로 넘어온 문자열이나 심볼이 그 이름과 맞는 메소드를 찾아서 실행 시켜준다
+
+```ruby
+method("puts").call("hello")
+```
+이런식으로 말이다. 그래서 메소드이름으로 된 심볼들이 argument로 넘어가는 것이다.
+
+[ruby symbol](https://negabaro.github.io/archive/ruby-hash-symbol)
+[method()](https://stackoverflow.com/questions/14736452/understanding-ruby-symbol-as-method-call)
+
+정리하자면, before_action은 only에서 지정된 컨트롤러의 액션이 실행되기 전에 실행되야할 함수(set_post)를 지정하는 필터링 역할을 하는 것이다.
+
+```ruby
+before_action :set_post, only: [:show, :edit, :update, :destroy]
+```
+
+검색할 때 rails filter라고 하면 될 듯하다.   
+
++ respond_to 메서드
+
+지정된 형식에 따라 다른 템플릿을 출력(html, json)   
+
+url.json붙이면 json형태로 보인다.
+
+```
+localhost:3000/new.json
+```
+
+```ruby
+ def create
+    @post = Post.new(post_params)
+
+    respond_to do |format|
+      if @post.save
+        format.html do redirect_to @post, notice: 'Post was successfully created.' end
+        format.json { render :show, status: :created, location: @post }
+      else
+        format.html { render :new }
+        # render함수에 json을 키워드 매개변수로 넘긴것, status키워드 매개변수에 unprocessable_entity라는 symbol을 넘긴것
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+```
+
+`redirect_to @post`는 해당 게시물이 보이는 곳으로 redirect된다.(show page)
+
++ strong parameter
+
+받고 싶은 것만 받자
+
+```ruby
+def post_params
+  params.require(:post).permit(:title, :content)
+end
+```
+
+post모델에서 title, content속성만을 받아와라   
+
++ flash
+
+일시적으로 띄워주는 메시지
+
+redirection 전 후로 메시지를 띄울 때
+
+```ruby
+flash[:아무이름] ="넣고싶은 메시지"
+
+flash[:notice] = "성공적인 메시지"
+flash[:alert] = "경고, 실패의 메시지"
+```
+
+```ruby
+respond_to do |format|
+      if @post.save
+        flash[:notice] = 'Post was successfully created.'
+        format.html do redirect_to @post end
+        format.json { render :show, status: :created, location: @post }
+      else
+        format.html { render :new }
+        # render함수에 json을 키워드 매개변수로 넘긴것, status키워드 매개변수에 unprocessable_entity라는 symbol을 넘긴것
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+```
