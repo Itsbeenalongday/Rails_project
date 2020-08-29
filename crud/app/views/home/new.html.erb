@@ -1,6 +1,28 @@
+<!-- 기존의 방식
 <form action="/home/create" method="post">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
     제목: <input type="text" name="post_title"><br/>
     내용: <textarea name="post_content"></textarea><br/>
     <input type="submit" value="생성">
 </form>
+-->
+
+<!-- form_tag 방식 
+<%=form_tag(posts_path) do%>
+    <%=label_tag 'post_title', '제목'%>
+    <%=text_field_tag 'post_title' %><br/>
+    <%=label_tag 'post_content', '내용'%>
+    <%=text_area_tag 'post_content' %><br/>
+    <%=submit_tag '작성'%>
+<%end%>
+-->
+
+<!-- form_for 방식 -->
+<!-- @post에 따라 url, value, method를 따로 지정하지 않아도 자동으로 지정해줌 -->
+<%=form_for(@post, url: posts_path) do |f| %>
+    <%=f.label :title, '제목'%>
+    <%=f.text_field :title %><br/>
+    <%=f.label :content, '내용'%>
+    <%=f.text_area :content %><br/>
+    <%=f.submit '작성'%>
+<%end%>

@@ -9,14 +9,11 @@
 <% @posts.each do |instance| %>
     제목: <%=instance.title%><br/>
     내용: <%=instance.content%><br/>
-    <%=link_to(home_destroy_path(post_id: instance.id)) do%>
-        <button>삭제</button> <!--텍스트가 아닌 다른 것을 넣기 위해 do end로 감싸야 한다-->
-    <%end%>
-    <a href="/home/edit/<%=instance.id%>">
-        <button>수정</button>
-    </a><br/>
+    <!--텍스트가 아닌 다른 것을 넣기 위해 do end로 감싸야 한다-->
+    <%=link_to(home_destroy_path(post_id: instance.id)) do%><button>삭제</button><%end%>
+    <a href="/home/edit/<%=instance.id%>"><button>수정</button></a>
+    <br/>
     <% for i in 0...instance.content.length %>
         <%= '_' %>
-    <% end %>
-    <br/>
+    <% end %><br/>
 <%end%>

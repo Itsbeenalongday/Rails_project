@@ -1,6 +1,27 @@
+<!-- 기존의 방식
 <form action="/home/update/<%=@post.id%>" method="post">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
     제목: <input type="text" name="post_title" value=<%=@post.title%>><br/>
     내용: <textarea name="post_content"><%=@post.content%></textarea><br/>
     <input type="submit" value="수정">
 </form>
+-->
+
+<!-- form_tag 방식
+<%=form_tag(post_path, method: "patch") do%>
+    <%=label_tag 'post_title', '제목'%>
+    <%=text_field_tag 'post_title', @post.title %><br/>
+    <%=label_tag 'post_content', '내용'%>
+    <%=text_area_tag 'post_content', @post.content %><br/>
+    <%=submit_tag '수정'%>
+<%end%>
+-->
+<!--form_for 방식 -->
+<!-- @post에 따라 url, value, method를 따로 지정하지 않아도 자동으로 지정해줌 -->
+<%=form_for(@post) do |f| %>
+    <%=f.label :title, '제목'%>
+    <%=f.text_field :title%><br/>
+    <%=f.label :content, '내용'%>
+    <%=f.text_area :content%><br/>
+    <%=f.submit '수정'%>
+<%end%>

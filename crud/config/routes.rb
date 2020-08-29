@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # home/index가 get방식으로 요청되면 home controller의 index액션을 실행
   # 이게 없으면 redirect_to '/home/index'에서 에러가 난다
   get 'home/new'
-  post 'home/create'
+  post 'home/create', as: 'posts'
 
   # url과 action이 같다면 단축이가능한데
   # 이제 destroy와 destroy/:post_id로 url이 구분되므로 위와같이 단축할 수 없다. 
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   # /:post_id, post_id를 변수로 만들어 id를 저장할 수 있다.
 
   # 수정하는 공간으로 라우팅
-  get 'home/edit/:post_id' => 'home#edit', as: 'home_edit'
+  get 'home/edit/:post_id' => 'home#edit'
   # 수정을 반영하기 위한 라우팅
-  post 'home/update/:post_id' => 'home#update', as: 'home_update'
+  patch 'home/update/:post_id' => 'home#update', as: 'post'
 end

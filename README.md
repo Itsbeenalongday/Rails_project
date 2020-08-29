@@ -697,3 +697,45 @@ respond_to do |format|
       end
     end
 ```
+
++ form_helper
+
+  - 자동으로 CSRF 방지 코드 삽입(히든 토큰)
+  - 기본 메소드는 POST
+
+`form_tag`
+- 범용적인 입력 양식(모델과 관련이 없음)
+- ex) 검색 키워드, 조건
+
+`form_for`
+- 특정한 모델 편집
+- ex) 게시물 생성, 수정
+- 형식
+```ruby
+<%=form_for(테이블 한 행, url:posts_path, method:'post') do |row| %>
+  <%= f.태그종류 %>
+<%end%>
+```
+
+**form_for 사용 시 주의점**
+1. 모델과 관련이 있기때문에, params의 속성 즉, name지정 시, 모델의 shcema와 이름이 같아야한다.
+2. params가 2중 hash로 둘러싸여있어서 참조하는 코드도 달리해줘야한다.
+
+```ruby
+{"post" => {"title" => '제목', 'content' => '내용'}}
+
+post = Post.find(params[:post_id]) 
+post.title = params[:post][:title]
+post.content = params[:post][:content]
+```
+3. @post에 따라 url, value, method를 따로 지정하지 않아도 자동으로 지정해줌   
+   그래서 new.html.erb나 edit.html.erb가 코드가 동일
+```ruby
+<%=form_for @post  do |f| %>
+    <%=f.label :title, '제목'%>
+    <%=f.text_field :title %><br/>
+    <%=f.label :content, '내용'%>
+    <%=f.text_area :content %><br/>
+    <%=f.submit '작성'%>
+<%end%>
+```
