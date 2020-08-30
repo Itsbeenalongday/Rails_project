@@ -1,4 +1,4 @@
-cd s# Note
+# Note
 
 인강들으면서 리마인드
 
@@ -739,3 +739,62 @@ post.content = params[:post][:content]
     <%=f.submit '작성'%>
 <%end%>
 ```
+
++ render
+new.html.erb와 edit.html.erb가 같다고 했다.   
+코드의 중복이 생긴다.   
+
+1. 재사용되는 코드를 저장할 파일을 만든다.
+
+주의할 점은 파일명 앞에 `_`를 붙여야 한다는 것
+
+__예시__
+
+_form.html.erb
+```ruby
+<%=form_for(@post) do |f| %>
+    <%=f.label :title, '제목'%>
+    <%=f.text_field :title%><br/>
+    <%=f.label :content, '내용'%>
+    <%=f.text_area :content%><br/>
+    <%=f.submit '수정'%>
+<%end%>
+```
+
+그리고 해당 코드가 필요한 위치에 한 줄만 넣어주면 된다.
+
+```ruby
+<%= render 'form' %>
+```
+
++ routing
+
+```ruby
+resources :posts, controller: "home" 
+# 컨트롤러는 home인데, 만들어진 url은 posts를 사용하니까 컨트롤러 지정을 따로해줘야한다. 
+```
+restful하게 자동으로 라우팅 생성
+
++ 생성과 저장위치 지정을 한꺼번에 처리하기
+
+```ruby
+# 기존의 방식
+post = Post.new
+post.title = params[:post][:title]
+post.content = params[:post][:content]
+
+# 위의 작업을 한번에 해줄 수 있다.
+post = Post.new( # 생성
+  title: params[:post][:title] # 저장위치 지정
+  content: params[:post][:content]
+)
+
+# 위의 방식도 귀찮다
+post = Post.new(post_params)
+
+private
+def post_params
+  params.require(:post).permit(:title, :content) # 자동으로 마지막 줄이 리턴되므로
+end
+```
+

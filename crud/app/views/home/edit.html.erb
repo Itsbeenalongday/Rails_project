@@ -18,10 +18,5 @@
 -->
 <!--form_for 방식 -->
 <!-- @post에 따라 url, value, method를 따로 지정하지 않아도 자동으로 지정해줌 -->
-<%=form_for(@post) do |f| %>
-    <%=f.label :title, '제목'%>
-    <%=f.text_field :title%><br/>
-    <%=f.label :content, '내용'%>
-    <%=f.text_area :content%><br/>
-    <%=f.submit '수정'%>
-<%end%>
+
+<%= render 'form' %>

@@ -2,7 +2,7 @@
 
 <hr/>
 
-<a href="/home/new">새 글 작성</a>
+<%=link_to(new_post_path) do%><button>글 생성</button><%end%>
 
 <hr/>
 
@@ -10,8 +10,8 @@
     제목: <%=instance.title%><br/>
     내용: <%=instance.content%><br/>
     <!--텍스트가 아닌 다른 것을 넣기 위해 do end로 감싸야 한다-->
-    <%=link_to(home_destroy_path(post_id: instance.id)) do%><button>삭제</button><%end%>
-    <a href="/home/edit/<%=instance.id%>"><button>수정</button></a>
+    <%=link_to(post_path(instance.id), method: :delete) do%><button>삭제</button><%end%>
+    <%=link_to(edit_post_path(instance.id)) do%><button>수정</button><%end%>
     <br/>
     <% for i in 0...instance.content.length %>
         <%= '_' %>
