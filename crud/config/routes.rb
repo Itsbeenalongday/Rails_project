@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
+    path: 'user', # 컨트롤러 이름
+    path:_names: {sign_in: 'login', sign_out: 'logout'} # 액션 이름
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'home#index'
   
