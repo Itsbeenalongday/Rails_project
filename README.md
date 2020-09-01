@@ -797,4 +797,116 @@ def post_params
   params.require(:post).permit(:title, :content) # 자동으로 마지막 줄이 리턴되므로
 end
 ```
+## 14. devise
 
+1. gemfile에 gem 'deivse'를 작성
+
+2. 로그인할 수 있는 환경 구축
+```bash
+$ bundle install
+
+$ rails g devise:install
+
+$ rails g deviese:views
+
+$ rails g devise User
+```
+- User model 생성(devise와 연동이 되게하기 위해 model이 아닌 devise 명령을 사용)
+- route에 devise_for:users가 추가됨, user와 관련된 url생성
+- migration파일 자동생성
+
++ user.rb
+```ruby
+class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+end
+```
+
+
++ 주석 처리된 것은 필요하면 해제해서 사용하란 의미로 포함   
+  - confirmable: 유저 인증
+  - lockable: 회원 정지 ex) 비밀번호 3회 입력 오류 
+  - timeoutable: 일정 시간 뒤 자동 로그아웃
+  - omniauthable: facebook, google 로그인 연동
+
++ routes.rb
+
+```ruby
+Rails.application.routes.draw do
+  devise_for :users
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'home#index'
+  
+  resources :posts, controller: "home" 
+```
++ uesr와 연관된 라우트 설정
+
++ migration
+
+```ruby
+# frozen_string_literal: true
+
+class DeviseCreateUsers < ActiveRecord::Migration[6.0]
+  def change
+    create_table :users do |t|
+      ## Customizing
+      t.string :name
+      ## Database authenticatable
+      t.string :email,              null: false, default: ""
+      t.string :encrypted_password, null: false, default: ""
+
+      ## Recoverable
+      t.string   :reset_password_token
+      t.datetime :reset_password_sent_at
+
+      ## Rememberable
+      t.datetime :remember_created_at
+
+      ## Trackable
+      # t.integer  :sign_in_count, default: 0, null: false
+      # t.datetime :current_sign_in_at
+      # t.datetime :last_sign_in_at
+      # t.string   :current_sign_in_ip
+      # t.string   :last_sign_in_ip
+
+      ## Confirmable
+      # t.string   :confirmation_token
+      # t.datetime :confirmed_at
+      # t.datetime :confirmation_sent_at
+      # t.string   :unconfirmed_email # Only if using reconfirmable
+
+      ## Lockable
+      # t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
+      # t.string   :unlock_token # Only if unlock strategy is :email or :both
+      # t.datetime :locked_at
+
+
+      t.timestamps null: false
+    end
+
+    add_index :users, :email,                unique: true
+    add_index :users, :reset_password_token, unique: true
+    # add_index :users, :confirmation_token,   unique: true
+    # add_index :users, :unlock_token,         unique: true
+  end
+end
+
+```
+
+어느 페이지에서나 찾아볼 수 있어야 하므로 application.html.erb에 로그인/로그아웃 ui를 만들어 줘야 한다.   
+
+```ruby
+<% if user_signed_in?%> <!--로그인이 되어있는 경우-->
+  <%=current_user.email%>
+  <%=link_to '로그아웃', destroy_user_session_path, method: :delete%>
+<%else%> <!--로그인이 안되어 있는 경우-->
+  <%=link_to '회원 가입', new_user_registration_path%>
+  <%=link_to '로그인', new_user_session_path%>
+<%end%>
+
+```
+
+uesr_signed_in? 이나 current_user.email의 경우 devise가 제공해주는 method라고 생각하면 된다.
