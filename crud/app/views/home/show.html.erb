@@ -1,0 +1,7 @@
+<%=@post.id%>번째 글<br/>
+제목: <%=@post.title%> <br/>
+내용: <%=@post.content%> <br/>
+<%=link_to(post_path(@post), method: :delete) do%><button>삭제</button><%end%>
+<%=link_to(edit_post_path(@post)) do%><button>수정</button><%end%>
+<br/>
+<%=link_to posts_path do%><button>홈으로 가기</button><%end%>

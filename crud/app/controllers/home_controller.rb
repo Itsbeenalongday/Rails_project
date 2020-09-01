@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
-    before_action :set_post, only: [:edit, :update, :destroy]
+    before_action :set_post, only: [:edit, :update, :destroy, :show]
+    before_action :authenticate_user!, only: [:edit, :destroy]
 
     def index
         @posts = Post.all
@@ -27,6 +28,9 @@ class HomeController < ApplicationController
         end
     end
 
+    def show
+    end
+
     def edit
     end
 
@@ -36,7 +40,7 @@ class HomeController < ApplicationController
        # post.title = params[:post][:title]
        # post.content = params[:post][:content]
        respond_to do |format| # 지정된 형식에 따라 다른 템플릿을 출력(html, json) 
-            if post.update(post_params)
+            if @post.update(post_params)
                 format.html do
                     redirect_to posts_path,
                     notice: "게시물이 성공적으로 수정되었습니다."

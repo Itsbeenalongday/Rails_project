@@ -896,7 +896,7 @@ end
 
 ```
 
-어느 페이지에서나 찾아볼 수 있어야 하므로 application.html.erb에 로그인/로그아웃 ui를 만들어 줘야 한다.   
+3. 어느 페이지에서나 찾아볼 수 있어야 하므로 application.html.erb에 로그인/로그아웃 ui를 만들어 줘야 한다.   
 
 ```ruby
 <% if user_signed_in?%> <!--로그인이 되어있는 경우-->
@@ -910,3 +910,65 @@ end
 ```
 
 uesr_signed_in? 이나 current_user.email의 경우 devise가 제공해주는 method라고 생각하면 된다.
+
+4. 이제 로그인/로그아웃이 되니 이것과 게시판을 연동해보자
+
+1) 컨트롤러에 다음과 같은 코드를 삽입한다.
+```ruby
+before_action :authenticate_user!
+```
++ 로그인 하지 않으면 넘어가지 않는다.
++ only로 특정 액션만 적용 가능하다.
++ except로 특정 액션을 배제할 수 있다.
+
+2) 가입할 때 user의 추가정보를 받는 방법
+
++ app/view/devise/registrations/new.html.erb
+  - 회원 가입 view
++ app/view/devise/registrations/edit.html.erb
+  - 회원 수정 view
+
+해당 view파일에서 migration에 넣어준 정보를 받는다.
+
+3) 제대로 들어오는지 확인한다.
+
+근데 위와 같은 절차로 하니 들어오지 않았다.   
+
+곰곰히 생각해보니 우리는 devise와 관련된 컨트롤러를 작성한 적이 없다.   
+
+그래서 이와 관련된 컨트롤을 어디서 하나 찾아보니 모든 컨트롤러의 부모격인 application_controller(흡사 application.html.erb: 모든view의 조상)과 같은 역할을 하는 것이 있었다.
+
+여기다가 다음과 같은 코드를 넣어주면 devise를 컨트롤 할 수 있게된다.
+
+[rails devise](https://github.com/heartcombo/devise)
+
+```ruby
+class ApplicationController < ActionController::Base
+
+    before_action :configure_permitted_parameters, 
+        if: :devisecontroller?
+    # devise와 관련있는 컨트롤러 일 때만 실행되게 만듦
+
+    def configure_permitted_parameters
+        # keys에 자신이 추가한 속성을 써준다.
+        # 가입할 때 추가속성 :sign_up(keyword)
+        devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+        # 수정할 때 추가속성 :account_update(keyword)
+        devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+    end
+end
+
+```
+
+__keypoint__
++ controller가 부재할 때는 어디에 컨트롤 코드를 작성할 것인지를 추론해보는 것
+
+4) 마지막으로 devise_for :user 라우트 이름 변경
+
++ routes.rb
+```ruby
+devise_for :users,
+path: 'user', # 컨트롤러 이름
+path:_names: {sign_in: 'login', sign_out: 'logout'} # 액션 이름
+#sign_in은 login으로 sign_out은 logout으로
+```
