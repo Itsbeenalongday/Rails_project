@@ -19,9 +19,14 @@ echo "\n"
 echo -n "please enter a commit message >> "
 read line
 echo "\n"
-sudo git add .
+expect << EOF
+spawn sudo git add .
+expect -re "Password:"
+send "Coder1771?!?moneY\r"
+expect eof
+EOF
 echo "\n"
-sudo git commit -m "$line"
+git commit -m "$line"
 echo "\n"
 git push
 echo "\n"
