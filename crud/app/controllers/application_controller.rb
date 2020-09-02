@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
     before_action :configure_permitted_parameters, 
-        if: :devisecontroller?
+        if: :devise_controller?
     # devise와 관련있는 컨트롤러 일 때만 실행되게 만듦
 
     def configure_permitted_parameters

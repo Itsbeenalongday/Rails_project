@@ -4,4 +4,18 @@
 <%=link_to(post_path(@post), method: :delete) do%><button>삭제</button><%end%>
 <%=link_to(edit_post_path(@post)) do%><button>수정</button><%end%>
 <br/>
+<%=form_for Comment.new, url: post_comments_path(@post.id) do |f| %>
+    <%=f.label :content, '댓글 내용'%>
+    <%=f.text_field :content%><br/>
+    <%=f.submit '댓글 작성'%>
+<%end%>
+<br/>
 <%=link_to posts_path do%><button>홈으로 가기</button><%end%>
+<br/>
+<% @post.comments.each do |c| %>
+    <%=c.content%>
+    <%if c.user_id == current_user.id%>
+        <%=link_to '[삭제]', post_comment_path(@post.id, c.id), method: :delete %>
+    <%end%>
+    <br/>
+<%end%>

@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
-    path: 'user', # 컨트롤러 이름
-    path:_names: {sign_in: 'login', sign_out: 'logout'} # 액션 이름
+  get 'comments/create'
+  get 'comments/destroy'
+  devise_for :users, path: 'user', path_names: {sign_in: 'login', sign_out: 'logout'}
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'home#index'
   
-  resources :posts, controller: "home" 
+  resources :posts, controller: "home" do
+    resources :comments, only: [:create, :destroy]
+  end
   # 컨트롤러는 home인데, 만들어진 url은 posts를 사용하니까 컨트롤러 지정을 따로해줘야한다. 
 
   #get 'home/index'

@@ -967,8 +967,175 @@ __keypoint__
 
 + routes.rb
 ```ruby
-devise_for :users,
-path: 'user', # 컨트롤러 이름
-path:_names: {sign_in: 'login', sign_out: 'logout'} # 액션 이름
+devise_for :users, path: 'user', path_names: {sign_in: 'login', sign_out: 'logout'}
+ # path는 컨트롤러 이름 # path_names액션 이름
 #sign_in은 login으로 sign_out은 logout으로
 ```
+
+## 15. Comment
+
+1. 관계를 생각해보자
+
++ 1개의 글은 N개의 댓글을 가질 수 있다
+
++ N개의 댓글은 하나의 게시물에 속한다.
+
+때문에 댓글은 게시물/사용자의 ID를 가져야한다.
+
+```bash
+$ rails g model comment content:string post:references
+
+
+```
+를 하게 되면 게시물 즉 post모델의 id를 comment가 포함하게 되고,   
+이것은 foreign key이다.
+
+2. 모델간의 관계 맺기
+
++ post.rb
+
+```ruby
+  has_many :comments # 하나의 게시물이 n개의 댓글, 복수형
+```
+
++ comment.rb
+```ruby
+  belongs_to :post # n개의 댓글이 하나의 게시물에 속함
+```
+
+3. 컨트롤러 만들기
+
+**controller의 이름은 model의 복수형으로**
+
+```bash
+$ rails g controller comments create destroy
+```
+
+4. 라우팅 설정
+
+댓글은 게시글에 속해있다. => 라우트도 마찬가지로 속해야한다.
+
+ex) /post/1/comments/2 
+
+요런식으로
+
+때문에 routing 지정방식이 조금 특이한데
+
++ routes.rb
+
+```ruby
+resources :posts, controller: "home" do
+    resources :comments, only: [:create, :destroy]
+  end
+```
+
+이렇게 post의 경로내에 집어넣으면 중첩이 된다.
+
+5. 이제 본격적인 액션을 만들어보자
+
++ create
+```ruby
+def create
+    comment = Comment.create(comment_params)
+    comment.post_id = params[:post_id]
+    comment.save
+    redirect_to post_path(params[:post_id])
+  end
+
+ private
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
+```
+게시글 생성과 별 다른 거 없다. 다만 id가 post_id를 내포하고 있기 때문에   
+post_id저장하는 과정이 필요하다.   
+comment_params에 post_id를 포함시킬 수도 있겠지만 url에 id가 내포되어 있기 매문에 굳이 안넣어줘도 된다. 만약 이런 방법으로 하려면 form_for태그에서 hidden_field를 통해 post_id를 또 
+보내야한다.
+
++ destroy
+
+삭제도 게시글 삭제와 똑같다
+
+```ruby
+def destroy
+    Comment.find(params[:id]).destroy
+    redirect_to post_path(params[:post_id])
+end
+```
+
+별 내용이 없기에 여기까지 정리하겠다.
+
+## 16. User
+
+uesr와 게시글, user와 댓글을 연결지어보자
+
+1. migration 파일에 속성 추가
+```bash
+$ rails g migration add_user_to_comment user:references
+
+$ rails db:migrate
+```
+
+테이블을 삭제하지 않고도 변경할 수 있는데, 그 방법은 테이블의 마이그레이션을 변경하는 것이다.   
+
++ column추가 `add_칼럼_to_테이블`
+
++ column삭제 `remove_칼럼_from_테이블`
+
+이 규칙들은 마이그레이션파일의 이름이 된다.
+
+2. 관게를 맺어줘야 한다.
+
++ user.rb
+```ruby
+has_many :comments
+```
+
++ comment.rb
+```ruby
+belongs_to :user
+```
+
+관계를 맺어줘야 나중에 따로 코드를 작성하지 않아도 `post.comment.id` 이렇게 참조가 될 수 있는 것이다.   
+
+예시)
+```ruby
+<% @post.comments.each do |c| %>
+    <%=c.content%>
+    <%=link_to '[삭제]', post_comment_path(@post.id, c.id), method: :delete %>
+<%end%>
+```
+
+3. 컨트롤러에서 user의 정보를 저장하기
+
++ comments_controller.rb
+```ruby
+class CommentsController < ApplicationController
+  def create
+    comment = Comment.create(comment_params)
+    comment.post_id = params[:post_id]
+    comment.user_id = current_user.id # 현재 로그인 되어있는 user가 댓글의 작성자
+    comment.save
+    redirect_to post_path(params[:post_id])
+  end
+
+ ...
+
+end
+```
+
+4. 자신의 댓글만 삭제할 수 있도록 구현해보기
+
++ show.html.erb
+
+```ruby
+<% @post.comments.each do |c| %>
+    <%=c.content%>
+    <%if c.user_id == current_user.id%> <!--댓글의 user_id와 current_user.id가 같을 때만-->
+        <%=link_to '[삭제]', post_comment_path(@post.id, c.id), method: :delete %>
+    <%end%>
+    <br/>
+<%end%>
+```
+
+## 17. M : N 관계 해시태그
