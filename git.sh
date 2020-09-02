@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/expect
 echo "############################################"
 echo "#                                          #"
 echo "#                                          #"
@@ -21,12 +21,19 @@ read line
 echo "\n"
 expect << EOF
 spawn sudo git add .
-expect -re "Password:"
-send "Coder1771?!?moneY\r"
+expect {
+    -re {\[sudo\] password for sungminyou:} {send "Coder1771?!?moneY\r"}
+}
 expect eof
 EOF
 echo "\n"
-git commit -m "$line"
+expect << EOF
+spawn sudo git commit -m "$line"
+expect {
+    -re {\[sudo\] password for sungminyou:} {send "Coder1771?!?moneY\r"}
+}
+expect eof
+EOF
 echo "\n"
 git push
 echo "\n"
