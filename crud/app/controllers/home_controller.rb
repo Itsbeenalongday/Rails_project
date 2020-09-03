@@ -8,12 +8,18 @@ class HomeController < ApplicationController
 
     def new
         @post = Post.new
+        3.times {@post.hashtags.new}
     end
 
     def create
         post = Post.new(post_params)# 테이블 한 행 추가, 한 행을 만들고(객체), @post라는 변수에 저장
        # post.title = params[:post][:title] # params 객체의 post_title 속성을 title에 저장
        # post.content = params[:post][:content] # params 객체의 post_content 속성을 content에 저장
+       3.times do |i|
+        hashtags = hashtag_params[:hashtags_attributes][:"#{i}"][:"title"]
+        hashtags = Hashtag.find_or_create_by(title: hashtags)
+        post.hashtags << hashtags
+       end
        respond_to do |format|
             if post.save # 테이블에 쓴 내용을 저장
                 format.html do
@@ -68,5 +74,9 @@ class HomeController < ApplicationController
 
     def set_post
         @post = Post.find(params[:id])
+    end
+
+    def hashtag_params
+        params.require(:post).permit(hashtags_attributes: [:title])
     end
 end
