@@ -3,5 +3,13 @@
     <%=f.text_field :title%><br/>
     <%=f.label :content, '내용'%>
     <%=f.text_area :content%><br/>
+    <ul>
+        <%=f.fields_for :hashtags do |h|%>
+            <li>
+            <%=h.label :title, '해시태그'%>
+            <%= h.text_field :title%>
+            </li>
+        <%end%>
+    </ul>
     <%=f.submit '확인'%>
 <%end%>

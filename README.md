@@ -1139,3 +1139,147 @@ end
 ```
 
 ## 17. M : N 관계 해시태그
+
+하나의 게시물이 여러개의 해시태그를 가질 수 있다.
+하나의 해시태그는 여러개의 게시물에 속할 수 있다.
+
+즉 해시태그와 게시물은 m : n관계이다.
+
+이 관게를 위해서 연결테이블이라는 개념을 도입한다.
+
+<div align="center">
+
+![](./img/hashtag.PNG)
+
+</div>
+
+1. hashtag모델을 만들자
+
+```bash
+$ rails g model hashtag title:string
+```
+
+2. 연결테이블을 만들자
+
+```bash
+$ rails g migration create_join_table_hashtags_posts posts hashtags
+
+$ rails db:migrate
+```
+
+**규칙이 있다**
+`create_join_tagle_테이블1s_테이블2s 테이블1s 테이블2s` 이런식으로 만들어 주면 연결테이블이 생성된다.
+
+3. 관계맺기
+
++ hashtag.rb
+```ruby
+has_and_belongs_to_many :posts
+```
+
++ posts.rb
+```ruby
+has_and_belongs_to_many :hashtags
+```
+
+4. view생성
+
+view의 관점에서 보았을 때는 해시태그는 게시물에 속해있는 것으로 볼 수 있다.
+
+만약에 코딩테스트 후기라는 글이 있는데, 이 글에는 다양한 해시태그를 달 수 있기 때문이다.
+
+하지만 해시태그에 게시물을 단다는 것은 좀 이상하게 다가온다. 때문에 view에서는 게시물에 속하는 것이 타당하다.
+
+그래서 view를 작성하기 전에 다음과 같은 코드가 필요하다
+
++ posts.rb
+
+```ruby
+accepts_nested_attributes_for :hashtags
+```
+
+해당 코드는 post모델의 테이블에 다양한 해시태그를 달 수 있다라는 의미로 받아들이면 된다.
+
++ _form.html.erb
+
+```ruby
+<%=form_for(@post) do |f| %>
+    <%=f.label :title, '제목'%>
+    <%=f.text_field :title%><br/>
+    <%=f.label :content, '내용'%>
+    <%=f.text_area :content%><br/>
+    <ul>
+        <%=f.fields_for :hashtags do |h|%> <!--hash tag가 post 필드의 일부-->
+            <li>
+            <%=h.label :title%>
+            <%= h.text_field :title%>
+            </li>
+        <%end%>
+    </ul>
+    <%=f.submit '확인'%>
+<%end%>
+```
+
+해당 작업까지 완료하고 보았더니 눈에 보이질 않는다. 왜일까?
+
+생각해보니 우리는 hashtag모델 테이블의 한 행을 만드는 작업과 내용을 넣는 작업을 해주지 않았다. 
+
+때문에 다음 작업이 필요하게 된다.
+
++ posts_controller.rb
+```ruby
+def new
+  @post = Post.new
+  3.times {@post.hashtags.new}
+end
+```
+
+다음 코드는 해시태그를 3개를 생성하겠다는 코드
+
+이제 저장을 해주는 작업이 필요하다
+
++ posts_controller.rb
+```ruby
+def create
+ post = Post.new(post_params)
+ 3.times do |i|
+  hashtags = hashtags_params[:hashtags_attributes][:"#{i}"][:"title"]
+  hashtags = Hashtag.find_or_create_by(title: hashtags)
+  @post.hashtags << hashtags
+ end
+
+def hashtag_params
+  params.require(:post).permit(hashtags_attributes: [:title])
+end
+```
+
+뭐가 이렇게 복잡한 것인가? 그 이유를 보기 알기위해선 params를 까볼 필요가 있다
+
+```json
+{"authenticity_token"=>"pUsJr7qFO3hY/z6x7Cr5K+VVRB6z6efjYKi4TbIAIaINYIf8/edlV6xeFIyoL3i5qzoVQv55VGD5fhfCtTE3XQ==", "post"=><ActionController::Parameters {"title"=>"2", "content"=>"해시2", "hashtags_attributes"=>{"0"=>{"title"=>"해시1"}, "1"=>{"title"=>"해시2"}, "2"=>{"title"=>"해시3"}}} permitted: false>, "commit"=>"확인", "controller"=>"home", "action"=>"create"}
+```
+
+params를 까보니 굉장히 복잡하게 둘려쌓여 있는 것을 볼 수 있다.
+
+따라서 hashtag의 내용을 꺼내보기 위해 3번의 참조가 필요하다는 것을 알 수 있다.
+
+params[:hashtags_attributes][0][:title] # "해시1"
+
+hashtag_params를 이용하여
+
+```json
+{"hashtags_attributes"=><ActionController::Parameters {"0"=><ActionController::Parameters {"title"=>"해시1"} permitted: true>, "1"=><ActionController::Parameters {"title"=>"해시2"} permitted: true>, "2"=><ActionController::Parameters {"title"=>"해시3"} permitted: true>} permitted: true>}
+```
+로 간단하게 바꿔줬을 뿐이다.
+
+이것이 가능한 이유는 아까 모델에서 작성한 `accepts_nested_attributes_for :hashtags` 때문이다!
+
+이제 저장이 되었을 터이니 볼 수 있게 만들어주자
+
++ show.html.erb
+
+```ruby
+<% @post.hashtags.each do |h| %>
+        #<%=h.title%>
+<%end%>
+```

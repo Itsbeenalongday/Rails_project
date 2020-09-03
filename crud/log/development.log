@@ -8125,3 +8125,646 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 17ms (Views: 15.8ms | ActiveRecord: 0.2ms | Allocations: 4724)
 
 
+  [1m[35m (33.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateHashtags (20200903093849)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "hashtags" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200903093849"]]
+  [1m[35m (5.5ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateJoinTableHashtagsPosts (20200903094107)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "hashtags_posts" ("post_id" integer NOT NULL, "hashtag_id" integer NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200903094107"]]
+  [1m[35m (9.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2020-09-03 19:15:52 +0900
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 59.5ms | Allocations: 5269)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 465ms (Views: 339.8ms | ActiveRecord: 1.2ms | Allocations: 18158)
+
+
+Started GET "/user/login" for ::1 at 2020-09-03 19:15:57 +0900
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 34.8ms | Allocations: 618)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 267.4ms | Allocations: 4742)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 327ms (Views: 283.8ms | ActiveRecord: 0.8ms | Allocations: 16123)
+
+
+Started POST "/user/login" for ::1 at 2020-09-03 19:16:04 +0900
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"NTzN5PeVvEGJx25/C5gdm4TiJH13/RthyYO5KJDtciJSt5YZVeQuLy63RNQ4d6txGs6bnpw9J3Cpdhygatf1zQ==", "user"=>{"email"=>"dbtjdals1771@ajou.ac.kr", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "dbtjdals1771@ajou.ac.kr"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Update (1.7ms)[0m  [1m[33mUPDATE "users" SET "remember_created_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["remember_created_at", "2020-09-03 10:16:04.931602"], ["updated_at", "2020-09-03 10:16:04.932814"], ["id", 1]]
+  [1m[35m (7.7ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 456ms (ActiveRecord: 11.6ms | Allocations: 11751)
+
+
+Started GET "/" for ::1 at 2020-09-03 19:16:05 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 5.2ms | Allocations: 1074)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 30ms (Views: 26.9ms | ActiveRecord: 0.4ms | Allocations: 5763)
+
+
+Started GET "/posts/63" for ::1 at 2020-09-03 19:16:06 +0900
+Processing by HomeController#show as HTML
+  Parameters: {"id"=>"63"}
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 63], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:71:in `set_post'
+  Rendering home/show.html.erb within layouts/application
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 63]]
+  ↳ app/views/home/show.html.erb:15
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/show.html.erb:17
+  Rendered home/show.html.erb within layouts/application (Duration: 160.9ms | Allocations: 10331)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 185ms (Views: 174.2ms | ActiveRecord: 2.0ms | Allocations: 14668)
+
+
+Started GET "/posts/new" for ::1 at 2020-09-03 19:16:11 +0900
+Processing by HomeController#new as HTML
+  Rendering home/new.html.erb within layouts/application
+  Rendered home/_form.html.erb (Duration: 6.4ms | Allocations: 1251)
+  Rendered home/new.html.erb within layouts/application (Duration: 22.8ms | Allocations: 2007)
+Completed 500 Internal Server Error in 122ms (ActiveRecord: 1.5ms | Allocations: 13019)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%=form_for(@post) do |f| %>
+    <%=f.label :title, '제목'%>
+    <%=f.text_field :title%><br/>
+    <%=f.label :content, '내용'%>
+    <%=f.text_area :content%><br/>
+    <ul>
+        <%=f.fields_for :hashtags do |h|%>
+            <li>
+            <%=h.label :title '해시태그'%>
+            <%= h.text_field :title%>
+            </li>
+        <%end%>
+    </ul>
+    <%=f.submit '확인'%>
+<%end%>
+):
+1:    <%=form_for(@post) do |f| %>
+2:        <%=f.label :title, '제목'%>
+3:        <%=f.text_field :title%><br/>
+4:        <%=f.label :content, '내용'%>
+5:        <%=f.text_area :content%><br/>
+6:        <ul>
+7:            <%=f.fields_for :hashtags do |h|%>
+8:                <li>
+9:                <%=h.label :title '해시태그'%>
+10:                <%= h.text_field :title%>
+11:                </li>
+12:            <%end%>
+13:        </ul>
+14:        <%=f.submit '확인'%>
+15:    <%end%>
+  
+app/views/home/_form.html.erb:9: syntax error, unexpected tSTRING_BEG, expecting ')'
+app/views/home/_form.html.erb:9: syntax error, unexpected tSTRING_BEG, expecting ')'
+app/views/home/_form.html.erb:9: syntax error, unexpected tSTRING_BEG, expecting ')'
+app/views/home/_form.html.erb:9: syntax error, unexpected tSTRING_BEG, expecting ')'
+app/views/home/_form.html.erb:9: syntax error, unexpected tSTRING_BEG, expecting ')'
+app/views/home/_form.html.erb:9: syntax error, unexpected tSTRING_BEG, expecting ')'
+app/views/home/new.html.erb:23
+Started GET "/" for ::1 at 2020-09-03 19:16:34 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 10.6ms | Allocations: 1360)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 79ms (Views: 76.0ms | ActiveRecord: 0.6ms | Allocations: 7324)
+
+
+Started GET "/posts/new" for ::1 at 2020-09-03 19:16:36 +0900
+Processing by HomeController#new as HTML
+  Rendering home/new.html.erb within layouts/application
+  Rendered home/_form.html.erb (Duration: 28.0ms | Allocations: 1137)
+  Rendered home/new.html.erb within layouts/application (Duration: 32.2ms | Allocations: 1874)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 52ms (Views: 48.7ms | ActiveRecord: 0.1ms | Allocations: 7272)
+
+
+Started POST "/posts" for ::1 at 2020-09-03 19:16:52 +0900
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"6dWKxgRzN99Q+lz1gVxYo2s6CUCHyDv3lSs08vvBX5pB/gSVQxFp8KRbdsjFWdkxJVVYHMpYiHQM/Zt9/PBJZQ==", "post"=>{"title"=>"해시태그1", "content"=>"해시태그 게시물1", "hashtags_attributes"=>{"0"=>{"title"=>"해시1"}, "1"=>{"title"=>""}, "2"=>{"title"=>""}}}, "commit"=>"확인"}
+[31mUnpermitted parameter: :hashtags_attributes[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:19:in `block in create'
+  [1m[36mPost Create (2.6ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "해시태그1"], ["content", "해시태그 게시물1"], ["created_at", "2020-09-03 10:16:52.627051"], ["updated_at", "2020-09-03 10:16:52.627051"]]
+  ↳ app/controllers/home_controller.rb:19:in `block in create'
+  [1m[35m (13.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:19:in `block in create'
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 30ms (ActiveRecord: 15.7ms | Allocations: 4474)
+
+
+Started GET "/posts" for ::1 at 2020-09-03 19:16:52 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 3.0ms | Allocations: 1136)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 70ms (Views: 68.9ms | ActiveRecord: 0.4ms | Allocations: 7256)
+
+
+Started GET "/posts/70" for ::1 at 2020-09-03 19:16:56 +0900
+Processing by HomeController#show as HTML
+  Parameters: {"id"=>"70"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 70], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:71:in `set_post'
+  Rendering home/show.html.erb within layouts/application
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 70]]
+  ↳ app/views/home/show.html.erb:15
+  Rendered home/show.html.erb within layouts/application (Duration: 6.9ms | Allocations: 1538)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 30ms (Views: 22.8ms | ActiveRecord: 0.7ms | Allocations: 6726)
+
+
+Started GET "/posts/new" for ::1 at 2020-09-03 19:17:34 +0900
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#new as HTML
+  Rendering home/new.html.erb within layouts/application
+  Rendered home/_form.html.erb (Duration: 3.1ms | Allocations: 1038)
+  Rendered home/new.html.erb within layouts/application (Duration: 5.6ms | Allocations: 1781)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 66ms (Views: 35.0ms | ActiveRecord: 2.4ms | Allocations: 26888)
+
+
+Started POST "/posts" for ::1 at 2020-09-03 19:17:44 +0900
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"pUsJr7qFO3hY/z6x7Cr5K+VVRB6z6efjYKi4TbIAIaINYIf8/edlV6xeFIyoL3i5qzoVQv55VGD5fhfCtTE3XQ==", "post"=>{"title"=>"2", "content"=>"해시2", "hashtags_attributes"=>{"0"=>{"title"=>"해시1"}, "1"=>{"title"=>"해시2"}, "2"=>{"title"=>"해시3"}}}, "commit"=>"확인"}
+[31mUnpermitted parameter: :hashtags_attributes[0m
+  Rendering home/create.html.erb within layouts/application
+  Rendered home/create.html.erb within layouts/application (Duration: 1.8ms | Allocations: 123)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 77ms (Views: 54.8ms | ActiveRecord: 0.2ms | Allocations: 5494)
+
+
+Started POST "/posts" for ::1 at 2020-09-03 19:20:56 +0900
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"esGIuU4lFETZ0iOAw8gxTAsFMWmlfCxZV90ZYhaKYZk/U9fQjnjVKm9RuQNgU7BvEKR0An7irxVvYcKGM09zKQ==", "post"=>{"title"=>"2", "content"=>"해시2", "hashtags_attributes"=>{"0"=>{"title"=>"해시1"}, "1"=>{"title"=>"해시2"}, "2"=>{"title"=>"해시3"}}}, "commit"=>"확인"}
+[31mUnpermitted parameter: :hashtags_attributes[0m
+[31mUnpermitted parameters: :title, :content[0m
+  Rendering home/create.html.erb within layouts/application
+  Rendered home/create.html.erb within layouts/application (Duration: 6.7ms | Allocations: 170)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 70ms (Views: 52.1ms | ActiveRecord: 2.0ms | Allocations: 18972)
+
+
+Started POST "/posts" for ::1 at 2020-09-03 19:21:13 +0900
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"esGIuU4lFETZ0iOAw8gxTAsFMWmlfCxZV90ZYhaKYZk/U9fQjnjVKm9RuQNgU7BvEKR0An7irxVvYcKGM09zKQ==", "post"=>{"title"=>"2", "content"=>"해시2", "hashtags_attributes"=>{"0"=>{"title"=>"해시1"}, "1"=>{"title"=>"해시2"}, "2"=>{"title"=>"해시3"}}}, "commit"=>"확인"}
+[31mUnpermitted parameter: :hashtags_attributes[0m
+[31mUnpermitted parameters: :title, :content[0m
+  Rendering home/create.html.erb within layouts/application
+  Rendered home/create.html.erb within layouts/application (Duration: 5.2ms | Allocations: 128)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 32ms (Views: 29.1ms | ActiveRecord: 0.1ms | Allocations: 6233)
+
+
+Started POST "/posts" for ::1 at 2020-09-03 19:24:33 +0900
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"esGIuU4lFETZ0iOAw8gxTAsFMWmlfCxZV90ZYhaKYZk/U9fQjnjVKm9RuQNgU7BvEKR0An7irxVvYcKGM09zKQ==", "post"=>{"title"=>"2", "content"=>"해시2", "hashtags_attributes"=>{"0"=>{"title"=>"해시1"}, "1"=>{"title"=>"해시2"}, "2"=>{"title"=>"해시3"}}}, "commit"=>"확인"}
+[31mUnpermitted parameter: :hashtags_attributes[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:19:in `block in create'
+  [1m[36mPost Create (1.9ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "2"], ["content", "해시2"], ["created_at", "2020-09-03 10:24:33.799205"], ["updated_at", "2020-09-03 10:24:33.799205"]]
+  ↳ app/controllers/home_controller.rb:19:in `block in create'
+  [1m[35m (11.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:19:in `block in create'
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 40ms (ActiveRecord: 14.1ms | Allocations: 10881)
+
+
+Started GET "/posts" for ::1 at 2020-09-03 19:24:33 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 4.4ms | Allocations: 1497)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 41ms (Views: 37.9ms | ActiveRecord: 1.5ms | Allocations: 13366)
+
+
+Started GET "/posts/71" for ::1 at 2020-09-03 19:24:35 +0900
+Processing by HomeController#show as HTML
+  Parameters: {"id"=>"71"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 71], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:71:in `set_post'
+  Rendering home/show.html.erb within layouts/application
+  Rendered home/show.html.erb within layouts/application (Duration: 270.3ms | Allocations: 162904)
+Completed 500 Internal Server Error in 279ms (ActiveRecord: 0.3ms | Allocations: 164216)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `post' for #<#<Class:0x00007fee185b7d28>:0x00007fee18767650>
+Did you mean?  @post):
+    2: 제목: <%=@post.title%> <br/>
+    3: 내용: <%=@post.content%> <br/>
+    4: <p>
+    5:     <%post.hashtags.each do |h|%>
+    6:         <%=h.title%><br/>
+    7:     <%end%>
+    8: </p>
+  
+app/views/home/show.html.erb:5
+Started GET "/posts" for ::1 at 2020-09-03 19:24:46 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 7.3ms | Allocations: 1465)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 103ms (Views: 99.5ms | ActiveRecord: 0.5ms | Allocations: 8261)
+
+
+Started GET "/posts/71" for ::1 at 2020-09-03 19:24:47 +0900
+Processing by HomeController#show as HTML
+  Parameters: {"id"=>"71"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 71], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:71:in `set_post'
+  Rendering home/show.html.erb within layouts/application
+  [1m[36mHashtag Load (0.3ms)[0m  [1m[34mSELECT "hashtags".* FROM "hashtags" INNER JOIN "hashtags_posts" ON "hashtags"."id" = "hashtags_posts"."hashtag_id" WHERE "hashtags_posts"."post_id" = ?[0m  [["post_id", 71]]
+  ↳ app/views/home/show.html.erb:5
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 71]]
+  ↳ app/views/home/show.html.erb:20
+  Rendered home/show.html.erb within layouts/application (Duration: 50.2ms | Allocations: 13786)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 83ms (Views: 72.6ms | ActiveRecord: 3.3ms | Allocations: 18872)
+
+
+Started GET "/posts/new" for ::1 at 2020-09-03 19:25:04 +0900
+Processing by HomeController#new as HTML
+  Rendering home/new.html.erb within layouts/application
+  Rendered home/_form.html.erb (Duration: 4.7ms | Allocations: 1033)
+  Rendered home/new.html.erb within layouts/application (Duration: 8.7ms | Allocations: 1774)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 47ms (Views: 37.1ms | ActiveRecord: 0.2ms | Allocations: 9451)
+
+
+Started POST "/posts" for ::1 at 2020-09-03 19:25:14 +0900
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"liixmy87FRVhPQbwaWx91w+05piSITsXHRiqdkiK1pg+Az/IaFlLOpWcLM0tafxFQdu3xN+xiJSEzgX5T7vAZw==", "post"=>{"title"=>"해시3", "content"=>"해시태그3", "hashtags_attributes"=>{"0"=>{"title"=>"해시1"}, "1"=>{"title"=>"해시2"}, "2"=>{"title"=>"해시3"}}}, "commit"=>"확인"}
+[31mUnpermitted parameter: :hashtags_attributes[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:19:in `block in create'
+  [1m[36mPost Create (1.9ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "해시3"], ["content", "해시태그3"], ["created_at", "2020-09-03 10:25:14.115482"], ["updated_at", "2020-09-03 10:25:14.115482"]]
+  ↳ app/controllers/home_controller.rb:19:in `block in create'
+  [1m[35m (30.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:19:in `block in create'
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 49ms (ActiveRecord: 32.9ms | Allocations: 4254)
+
+
+Started GET "/posts" for ::1 at 2020-09-03 19:25:14 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 4.3ms | Allocations: 1247)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 21ms (Views: 20.0ms | ActiveRecord: 0.4ms | Allocations: 5765)
+
+
+Started GET "/posts/72" for ::1 at 2020-09-03 19:25:16 +0900
+Processing by HomeController#show as HTML
+  Parameters: {"id"=>"72"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 72], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:71:in `set_post'
+  Rendering home/show.html.erb within layouts/application
+  [1m[36mHashtag Load (0.3ms)[0m  [1m[34mSELECT "hashtags".* FROM "hashtags" INNER JOIN "hashtags_posts" ON "hashtags"."id" = "hashtags_posts"."hashtag_id" WHERE "hashtags_posts"."post_id" = ?[0m  [["post_id", 72]]
+  ↳ app/views/home/show.html.erb:5
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 72]]
+  ↳ app/views/home/show.html.erb:20
+  Rendered home/show.html.erb within layouts/application (Duration: 15.3ms | Allocations: 2064)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 46ms (Views: 38.2ms | ActiveRecord: 1.0ms | Allocations: 7110)
+
+
+Started DELETE "/posts/72" for ::1 at 2020-09-03 19:27:54 +0900
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#destroy as HTML
+  Parameters: {"authenticity_token"=>"ohRdaVJH74dgRaaI2vTQCcy+9HBmI/4BX5remYs0u1/nhgIAkhou6dbGPAt5b1Eq1x+xG729fU1nJgV9rvGp7w==", "id"=>"72"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 72], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:76:in `set_post'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+  [1m[36mPost::HABTM_Hashtags Destroy (0.1ms)[0m  [1m[31mDELETE FROM "hashtags_posts" WHERE "hashtags_posts"."post_id" = ?[0m  [["post_id", 72]]
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+  [1m[36mPost Destroy (1.4ms)[0m  [1m[31mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 72]]
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+  [1m[35m (12.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 72ms (ActiveRecord: 16.7ms | Allocations: 22241)
+
+
+Started GET "/posts" for ::1 at 2020-09-03 19:27:54 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 6.2ms | Allocations: 1486)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 43ms (Views: 40.5ms | ActiveRecord: 0.6ms | Allocations: 7146)
+
+
+Started GET "/posts/71" for ::1 at 2020-09-03 19:27:58 +0900
+Processing by HomeController#show as HTML
+  Parameters: {"id"=>"71"}
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 71], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:76:in `set_post'
+  Rendering home/show.html.erb within layouts/application
+  [1m[36mHashtag Load (1.2ms)[0m  [1m[34mSELECT "hashtags".* FROM "hashtags" INNER JOIN "hashtags_posts" ON "hashtags"."id" = "hashtags_posts"."hashtag_id" WHERE "hashtags_posts"."post_id" = ?[0m  [["post_id", 71]]
+  ↳ app/views/home/show.html.erb:5
+  [1m[36mComment Load (1.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 71]]
+  ↳ app/views/home/show.html.erb:20
+  Rendered home/show.html.erb within layouts/application (Duration: 108.6ms | Allocations: 9820)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 236ms (Views: 211.7ms | ActiveRecord: 6.4ms | Allocations: 17203)
+
+
+Started DELETE "/posts/71" for ::1 at 2020-09-03 19:28:01 +0900
+Processing by HomeController#destroy as HTML
+  Parameters: {"authenticity_token"=>"SQ+GZ37o+VQRhxPtHF7SE3ZPYZ6hmLSdm3zDoTilWJ0MndkOvrU4OqcEiW6/xVMwbe4k9XoGN9GjwBhFHWBKLQ==", "id"=>"71"}
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 71], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:76:in `set_post'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+  [1m[36mPost::HABTM_Hashtags Destroy (0.3ms)[0m  [1m[31mDELETE FROM "hashtags_posts" WHERE "hashtags_posts"."post_id" = ?[0m  [["post_id", 71]]
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+  [1m[36mPost Destroy (4.2ms)[0m  [1m[31mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 71]]
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+  [1m[35m (15.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 156ms (ActiveRecord: 21.2ms | Allocations: 6392)
+
+
+Started GET "/posts" for ::1 at 2020-09-03 19:28:01 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 7.1ms | Allocations: 1134)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 80ms (Views: 78.7ms | ActiveRecord: 0.5ms | Allocations: 7136)
+
+
+Started GET "/posts/70" for ::1 at 2020-09-03 19:28:02 +0900
+Processing by HomeController#show as HTML
+  Parameters: {"id"=>"70"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 70], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:76:in `set_post'
+  Rendering home/show.html.erb within layouts/application
+  [1m[36mHashtag Load (0.4ms)[0m  [1m[34mSELECT "hashtags".* FROM "hashtags" INNER JOIN "hashtags_posts" ON "hashtags"."id" = "hashtags_posts"."hashtag_id" WHERE "hashtags_posts"."post_id" = ?[0m  [["post_id", 70]]
+  ↳ app/views/home/show.html.erb:5
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 70]]
+  ↳ app/views/home/show.html.erb:20
+  Rendered home/show.html.erb within layouts/application (Duration: 22.2ms | Allocations: 2061)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 59ms (Views: 54.5ms | ActiveRecord: 1.1ms | Allocations: 7095)
+
+
+Started DELETE "/posts/70" for ::1 at 2020-09-03 19:28:04 +0900
+Processing by HomeController#destroy as HTML
+  Parameters: {"authenticity_token"=>"NK2p0xeVgG8t88g2hU1MGumZnQK4sMjJvZ9joLk604pxP/a618hBAZtwUrUm1s058jjYaWMuS4WFI7hEnP/BOg==", "id"=>"70"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 70], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:76:in `set_post'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+  [1m[36mPost::HABTM_Hashtags Destroy (0.4ms)[0m  [1m[31mDELETE FROM "hashtags_posts" WHERE "hashtags_posts"."post_id" = ?[0m  [["post_id", 70]]
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+  [1m[36mPost Destroy (2.3ms)[0m  [1m[31mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 70]]
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+  [1m[35m (14.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 48ms (ActiveRecord: 18.0ms | Allocations: 6384)
+
+
+Started GET "/posts" for ::1 at 2020-09-03 19:28:04 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 4.9ms | Allocations: 1067)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 27ms (Views: 25.2ms | ActiveRecord: 0.4ms | Allocations: 5537)
+
+
+Started GET "/posts/69" for ::1 at 2020-09-03 19:28:04 +0900
+Processing by HomeController#show as HTML
+  Parameters: {"id"=>"69"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 69], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:76:in `set_post'
+  Rendering home/show.html.erb within layouts/application
+  [1m[36mHashtag Load (0.2ms)[0m  [1m[34mSELECT "hashtags".* FROM "hashtags" INNER JOIN "hashtags_posts" ON "hashtags"."id" = "hashtags_posts"."hashtag_id" WHERE "hashtags_posts"."post_id" = ?[0m  [["post_id", 69]]
+  ↳ app/views/home/show.html.erb:5
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 69]]
+  ↳ app/views/home/show.html.erb:20
+  Rendered home/show.html.erb within layouts/application (Duration: 14.9ms | Allocations: 2061)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 53ms (Views: 44.1ms | ActiveRecord: 1.4ms | Allocations: 7101)
+
+
+Started DELETE "/posts/69" for ::1 at 2020-09-03 19:28:05 +0900
+Processing by HomeController#destroy as HTML
+  Parameters: {"authenticity_token"=>"7Esf0XQ+X2uDaJl0Ip2FaQGifCQNE5BuYvdJzSgbDRGp2UC4tGOeBTXrA/eBBgRKGgM5T9aNEyJaS5IpDd4foQ==", "id"=>"69"}
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 69], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:76:in `set_post'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+  [1m[36mPost::HABTM_Hashtags Destroy (0.3ms)[0m  [1m[31mDELETE FROM "hashtags_posts" WHERE "hashtags_posts"."post_id" = ?[0m  [["post_id", 69]]
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+  [1m[36mPost Destroy (1.5ms)[0m  [1m[31mDELETE FROM "posts" WHERE "posts"."id" = ?[0m  [["id", 69]]
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+  [1m[35m (22.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:66:in `destroy'
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 65ms (ActiveRecord: 25.1ms | Allocations: 6385)
+
+
+Started GET "/posts" for ::1 at 2020-09-03 19:28:05 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 4.5ms | Allocations: 1003)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 29ms (Views: 27.2ms | ActiveRecord: 0.4ms | Allocations: 5483)
+
+
+Started GET "/posts/new" for ::1 at 2020-09-03 19:28:10 +0900
+Processing by HomeController#new as HTML
+  Rendering home/new.html.erb within layouts/application
+  Rendered home/_form.html.erb (Duration: 3.0ms | Allocations: 1034)
+  Rendered home/new.html.erb within layouts/application (Duration: 7.0ms | Allocations: 1770)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 56ms (Views: 47.0ms | ActiveRecord: 0.2ms | Allocations: 9401)
+
+
+Started POST "/posts" for ::1 at 2020-09-03 19:28:18 +0900
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"6V6mJY7MclF63DV7wg/X8J+AnvHQOyAXk7urU2VkBzJBdSh2ya4sfo59H0aGClZi0e/PrZ2rk5QKbQTcYlURzQ==", "post"=>{"title"=>"해시1", "content"=>"해시태그 게시물 1", "hashtags_attributes"=>{"0"=>{"title"=>"헤새1"}, "1"=>{"title"=>""}, "2"=>{"title"=>""}}}, "commit"=>"확인"}
+[31mUnpermitted parameter: :hashtags_attributes[0m
+Completed 500 Internal Server Error in 186ms (ActiveRecord: 0.0ms | Allocations: 108911)
+
+
+  
+NameError (undefined local variable or method `hashtags_params' for #<HomeController:0x00007fee18921310>
+Did you mean?  hashtag_params):
+  
+app/controllers/home_controller.rb:19:in `block in create'
+app/controllers/home_controller.rb:18:in `times'
+app/controllers/home_controller.rb:18:in `create'
+Started POST "/posts" for ::1 at 2020-09-03 19:29:07 +0900
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#create as HTML
+  Parameters: {"authenticity_token"=>"eGQ2dX4WLfrAuh0Yvp5MoFj7QREeEV+azQpHAscrjIA99mkcvkvslHY5h5sdBc2DQ1oEesWP3Nb1tpzm4u6eMA==", "post"=>{"title"=>"해시1", "content"=>"해시태그 게시물 1", "hashtags_attributes"=>{"0"=>{"title"=>"헤시1"}, "1"=>{"title"=>"해시2"}, "2"=>{"title"=>"해시3"}}}, "commit"=>"확인"}
+[31mUnpermitted parameter: :hashtags_attributes[0m
+[31mUnpermitted parameters: :title, :content[0m
+  [1m[36mHashtag Load (0.2ms)[0m  [1m[34mSELECT "hashtags".* FROM "hashtags" WHERE "hashtags"."title" = ? LIMIT ?[0m  [["title", "헤시1"], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:20:in `block in create'
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:20:in `block in create'
+  [1m[36mHashtag Create (2.8ms)[0m  [1m[32mINSERT INTO "hashtags" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "헤시1"], ["created_at", "2020-09-03 10:29:07.292159"], ["updated_at", "2020-09-03 10:29:07.292159"]]
+  ↳ app/controllers/home_controller.rb:20:in `block in create'
+  [1m[35m (9.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:20:in `block in create'
+[31mUnpermitted parameters: :title, :content[0m
+  [1m[36mHashtag Load (0.2ms)[0m  [1m[34mSELECT "hashtags".* FROM "hashtags" WHERE "hashtags"."title" = ? LIMIT ?[0m  [["title", "해시2"], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:20:in `block in create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:20:in `block in create'
+  [1m[36mHashtag Create (1.9ms)[0m  [1m[32mINSERT INTO "hashtags" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "해시2"], ["created_at", "2020-09-03 10:29:07.341299"], ["updated_at", "2020-09-03 10:29:07.341299"]]
+  ↳ app/controllers/home_controller.rb:20:in `block in create'
+  [1m[35m (9.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:20:in `block in create'
+[31mUnpermitted parameters: :title, :content[0m
+  [1m[36mHashtag Load (0.2ms)[0m  [1m[34mSELECT "hashtags".* FROM "hashtags" WHERE "hashtags"."title" = ? LIMIT ?[0m  [["title", "해시3"], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:20:in `block in create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:20:in `block in create'
+  [1m[36mHashtag Create (2.2ms)[0m  [1m[32mINSERT INTO "hashtags" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "해시3"], ["created_at", "2020-09-03 10:29:07.377904"], ["updated_at", "2020-09-03 10:29:07.377904"]]
+  ↳ app/controllers/home_controller.rb:20:in `block in create'
+  [1m[35m (8.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:20:in `block in create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/home_controller.rb:24:in `block in create'
+  [1m[36mPost Create (2.0ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "해시1"], ["content", "해시태그 게시물 1"], ["created_at", "2020-09-03 10:29:07.410036"], ["updated_at", "2020-09-03 10:29:07.410036"]]
+  ↳ app/controllers/home_controller.rb:24:in `block in create'
+  [1m[36mPost::HABTM_Hashtags Create (0.4ms)[0m  [1m[32mINSERT INTO "hashtags_posts" ("post_id", "hashtag_id") VALUES (?, ?)[0m  [["post_id", 73], ["hashtag_id", 1]]
+  ↳ app/controllers/home_controller.rb:24:in `block in create'
+  [1m[36mPost::HABTM_Hashtags Create (0.1ms)[0m  [1m[32mINSERT INTO "hashtags_posts" ("post_id", "hashtag_id") VALUES (?, ?)[0m  [["post_id", 73], ["hashtag_id", 2]]
+  ↳ app/controllers/home_controller.rb:24:in `block in create'
+  [1m[36mPost::HABTM_Hashtags Create (0.2ms)[0m  [1m[32mINSERT INTO "hashtags_posts" ("post_id", "hashtag_id") VALUES (?, ?)[0m  [["post_id", 73], ["hashtag_id", 3]]
+  ↳ app/controllers/home_controller.rb:24:in `block in create'
+  [1m[35m (8.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/home_controller.rb:24:in `block in create'
+Redirected to http://localhost:3000/posts
+Completed 302 Found in 222ms (ActiveRecord: 49.2ms | Allocations: 37992)
+
+
+Started GET "/posts" for ::1 at 2020-09-03 19:29:07 +0900
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:9
+  Rendered home/index.html.erb within layouts/application (Duration: 7.0ms | Allocations: 1106)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 38ms (Views: 35.3ms | ActiveRecord: 1.8ms | Allocations: 11875)
+
+
+Started GET "/posts/73" for ::1 at 2020-09-03 19:29:09 +0900
+Processing by HomeController#show as HTML
+  Parameters: {"id"=>"73"}
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 73], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:76:in `set_post'
+  Rendering home/show.html.erb within layouts/application
+  [1m[36mHashtag Load (0.4ms)[0m  [1m[34mSELECT "hashtags".* FROM "hashtags" INNER JOIN "hashtags_posts" ON "hashtags"."id" = "hashtags_posts"."hashtag_id" WHERE "hashtags_posts"."post_id" = ?[0m  [["post_id", 73]]
+  ↳ app/views/home/show.html.erb:5
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 73]]
+  ↳ app/views/home/show.html.erb:20
+  Rendered home/show.html.erb within layouts/application (Duration: 28.8ms | Allocations: 7828)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:13
+Completed 200 OK in 80ms (Views: 63.1ms | ActiveRecord: 2.4ms | Allocations: 12878)
+
+
